@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2854351179">
+    <data-source source="LOCAL" name="Rails qcircuit-gui: development" uuid="17b4775f-01e5-497b-ba31-2a7d50d7ebd4">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:qcircuit-gui_development</jdbc-url>
+      <user-name>crash</user-name>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails qcircuit-gui: test" uuid="890c723c-408a-4566-9d6f-a891929fa43d">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:qcircuit-gui_test</jdbc-url>
+      <user-name>crash</user-name>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails qcircuit-gui: production" uuid="202ec9d8-d9d5-4312-b248-8306ce281db9">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:qcircuit-gui_production</jdbc-url>
+      <user-name>crash</user-name>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+

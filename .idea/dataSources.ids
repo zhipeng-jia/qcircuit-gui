@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Rails qcircuit-gui: development" uuid="17b4775f-01e5-497b-ba31-2a7d50d7ebd4">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails qcircuit-gui: test" uuid="890c723c-408a-4566-9d6f-a891929fa43d">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails qcircuit-gui: production" uuid="202ec9d8-d9d5-4312-b248-8306ce281db9">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+</component>

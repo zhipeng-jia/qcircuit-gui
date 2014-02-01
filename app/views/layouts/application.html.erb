@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QcircuitGui</title>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="<%= controller.controller_name %>">
+  <div class="<%= controller.action_name %>">
+    <%= yield %>
+  </div>
+</div>
+
+</body>
+</html>
