@@ -32,3 +32,8 @@ class QcircuitGui.Drawing.MeasureD extends QcircuitGui.Drawing.ImageBox
       (@ghost.getImgHeight(scale) + scale / 5) / @ghost.span
     else
       @getImgHeight(scale) + scale / 5
+
+  extendGhost: (circuitArray, i, j) ->
+    unless @ghost
+      for k in [1...@extend]
+        circuitArray[i + k][j].push(new QcircuitGui.Drawing.MeasureD(@content, 0, this))

@@ -22,8 +22,3 @@ class QcircuitGui.Drawing.MeasureTab extends QcircuitGui.Drawing.ImageBox
 
   getHeight: (scale) ->
     @getImgHeight(scale) + scale / 5
-
-  extendGhost: (circuitArray, i, j) ->
-    unless @ghost
-      for k in [1...@extend]
-        circuitArray[i + k][j].push(new QcircuitGui.Drawing.MeasureD(@content, 0, this))
