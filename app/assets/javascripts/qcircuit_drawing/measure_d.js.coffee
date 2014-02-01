@@ -35,5 +35,5 @@ class QcircuitGui.Drawing.MeasureD extends QcircuitGui.Drawing.ImageBox
 
   extendGhost: (circuitArray, i, j) ->
     unless @ghost
-      for k in [1...@extend]
+      for k in [1...@span]
         circuitArray[i + k][j].push(new QcircuitGui.Drawing.MeasureD(@content, 0, this))
