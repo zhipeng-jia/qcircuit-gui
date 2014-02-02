@@ -25,15 +25,15 @@ class QcircuitGui.Drawing.Measure extends QcircuitGui.Drawing.ImageBox
 
   getWidth: (scale) ->
     if @ghost
-      @ghost.getImgWidth(scale) + scale / 5
+      @ghost.getImgWidth(scale) + scale / 2
     else
-      @getImgWidth(scale) + scale / 5
+      @getImgWidth(scale) + scale / 2
 
   getHeight: (scale) ->
     if @ghost
-      (@ghost.getImgHeight(scale) + scale / 5) / @ghost.span
+      (@ghost.getImgHeight(scale) + scale / 2) / @ghost.span
     else
-      @getImgHeight(scale) + scale / 5
+      @getImgHeight(scale) + scale / 2
 
   extendGhost: (circuitArray, i, j) ->
     unless @ghost

@@ -5,7 +5,7 @@ class QcircuitGui.Drawing.Grid
     @xAxis = new Array()
     @xAxis[0] = paddingUp
     for i in [1..rows]
-      tmp = 0
+      tmp = scale / 3
       for j in [0...columns]
         for item in content[i - 1][j]
           tmp = Math.max(item.getHeight(scale), tmp)
@@ -13,7 +13,7 @@ class QcircuitGui.Drawing.Grid
     @yAxis = new Array()
     @yAxis[0] = paddingLeft
     for i in [1..columns]
-      tmp = 0
+      tmp = scale / 3
       for j in [0...rows]
         for item in content[j][i - 1]
           tmp = Math.max(item.getWidth(scale), tmp)

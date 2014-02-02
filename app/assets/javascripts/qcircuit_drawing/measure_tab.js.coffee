@@ -18,7 +18,7 @@ class QcircuitGui.Drawing.MeasureTab extends QcircuitGui.Drawing.ImageBox
     @drawImage(canvas, p, q, scale)
 
   getWidth: (scale) ->
-    @getImgWidth(scale) + scale / 4
+    @getImgWidth(scale) + scale / 2
 
   getHeight: (scale) ->
-    @getImgHeight(scale) + scale / 5
+    @getImgHeight(scale) + scale / 3
