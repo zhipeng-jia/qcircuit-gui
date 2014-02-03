@@ -4,12 +4,22 @@ class QcircuitGui.Drawing.QuantumWire extends QcircuitGui.Drawing.BaseEntity
     @vertical = vertical
 
   drawWire: (canvas, grid, x, y, scale) ->
-    {x: x1, y: y1} = grid.getCenter(x, y)
+    {x: x1, y: y1} = grid.getCellCenter(x, y)
     if @vertical
-      {x: x2, y: y2} = grid.getCenter(x + @extend, y)
+      tmp = Math.max(0, x + @extend)
+      tmp = Math.min(tmp, grid.xAxis.length - 2)
+      {x: x2, y: y2} = grid.getCellCenter(tmp, y)
     else
-      {x: x2, y: y2} = grid.getCenter(x, y + @extend)
+      tmp = Math.max(0, y + @extend)
+      tmp = Math.min(tmp, grid.yAxis.length - 2)
+      {x: x2, y: y2} = grid.getCellCenter(x, tmp)
     @drawLine(canvas, x1, y1, x2, y2, @getStandardStrokeWidth(scale), 'black')
 
   getWidth: (scale) ->
     scale * 0.5
+
+  latexCode: ->
+    if @vertical
+      "\\qwx[#{@extend}]"
+    else
+      "\\qw[#{@extend}]"

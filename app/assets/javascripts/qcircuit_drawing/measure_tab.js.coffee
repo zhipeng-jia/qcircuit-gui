@@ -3,7 +3,7 @@ class QcircuitGui.Drawing.MeasureTab extends QcircuitGui.Drawing.ImageBox
     super(content)
 
   drawEntity: (canvas, grid, x, y, scale) ->
-    {x: p, y: q} = grid.getCenter(x, y)
+    {x: p, y: q} = grid.getCellCenter(x, y)
     w = @getImgWidth(scale) + scale / 10
     h = @getImgHeight(scale) + scale / 5
     d = scale / 7
@@ -18,7 +18,10 @@ class QcircuitGui.Drawing.MeasureTab extends QcircuitGui.Drawing.ImageBox
     @drawImage(canvas, p, q, scale)
 
   getWidth: (scale) ->
-    @getImgWidth(scale) + scale / 2
+    Math.max(super(scale), @getImgWidth(scale) + scale / 2)
 
   getHeight: (scale) ->
-    @getImgHeight(scale) + scale / 3
+    Math.max(super(scale), @getImgHeight(scale) + scale / 3)
+
+  latexCode: ->
+    "\\measuretab{#{@content}}"

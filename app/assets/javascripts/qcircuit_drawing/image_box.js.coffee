@@ -5,8 +5,9 @@ class QcircuitGui.Drawing.ImageBox extends QcircuitGui.Drawing.BaseEntity
     @ghost = ghost
     @imgUrl = "/latex/formula/#{@encodeLatexFormula(content)}.png"
     @img = null
+    @multiline = true if @span > 1
 
-  load: (promises) ->
+  loadResource: (promises) ->
     if not @ghost and not @img
       d = $.Deferred()
       @img = new Image()
@@ -34,3 +35,6 @@ class QcircuitGui.Drawing.ImageBox extends QcircuitGui.Drawing.BaseEntity
     for i in [0...code.length]
       res += code.charCodeAt(i).toString(16)
     res
+
+  canBeMultiLine: ->
+    true

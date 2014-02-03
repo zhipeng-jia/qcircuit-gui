@@ -15,6 +15,7 @@
 //= require jcanvas.js
 //= require ./global.js.coffee
 
+//= require ./qcircuit_drawing/basic_drawing.js.coffee
 //= require ./qcircuit_drawing/base_entity.js.coffee
 //= require ./qcircuit_drawing/image_box.js.coffee
 
@@ -33,3 +34,32 @@
 
 //= require ./qcircuit_drawing/grid.js.coffee
 //= require ./qcircuit_drawing/circuit.js.coffee
+
+//= require ./qcircuit_editing/helper.js.coffee
+//= require ./qcircuit_editing/select_row_or_column.js.coffee
+//= require ./qcircuit_editing/select_row.js.coffee
+
+//= require ./qcircuit_editing/add_quantum_wire.js.coffee
+//= require ./qcircuit_editing/add_classical_wire.js.coffee
+//= require ./qcircuit_editing/add_gate.js.coffee
+//= require ./qcircuit_editing/add_measure.js.coffee
+//= require ./qcircuit_editing/add_measure_d.js.coffee
+//= require ./qcircuit_editing/add_measure_tab.js.coffee
+//= require ./qcircuit_editing/add_meter.js.coffee
+//= require ./qcircuit_editing/add_target_gate.js.coffee
+//= require ./qcircuit_editing/add_qswap.js.coffee
+//= require ./qcircuit_editing/add_ctrl.js.coffee
+//= require ./qcircuit_editing/add_ctrlo.js.coffee
+//= require ./qcircuit_editing/add_control.js.coffee
+//= require ./qcircuit_editing/add_controlo.js.coffee
+//= require ./qcircuit_editing/add_left_stick.js.coffee
+//= require ./qcircuit_editing/add_right_stick.js.coffee
+
+//= require ./qcircuit_editing/add_row.js.coffee
+//= require ./qcircuit_editing/add_column.js.coffee
+//= require ./qcircuit_editing/delete_row.js.coffee
+//= require ./qcircuit_editing/delete_column.js.coffee
+//= require ./qcircuit_editing/erase_cell_content.js.coffee
+//= require ./qcircuit_editing/erase_wire.js.coffee
+
+//= require ./qcircuit_editing/editing_interface.js.coffee

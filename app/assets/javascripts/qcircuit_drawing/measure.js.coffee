@@ -1,8 +1,8 @@
 class QcircuitGui.Drawing.Measure extends QcircuitGui.Drawing.ImageBox
   drawEntity: (canvas, grid, x, y, scale) ->
     unless @ghost
-      {x: p1, y: q1} = grid.getCenter(x, y)
-      {x: p2, y: q2} = grid.getCenter(x + @span - 1, y)
+      {x: p1, y: q1} = grid.getCellCenter(x, y)
+      {x: p2, y: q2} = grid.getCellCenter(x + @span - 1, y)
       p = (p1 + p2) / 2
       q = (q1 + q2) / 2
       w = @getImgWidth(scale) + scale / 14
@@ -25,17 +25,36 @@ class QcircuitGui.Drawing.Measure extends QcircuitGui.Drawing.ImageBox
 
   getWidth: (scale) ->
     if @ghost
-      @ghost.getImgWidth(scale) + scale / 2
+      res = @ghost.getImgWidth(scale) + scale / 2
     else
-      @getImgWidth(scale) + scale / 2
+      res = @getImgWidth(scale) + scale / 2
+    Math.max(res, super(scale))
 
   getHeight: (scale) ->
     if @ghost
-      (@ghost.getImgHeight(scale) + scale / 2) / @ghost.span
+      res = (@ghost.getImgHeight(scale) + scale / 2) / @ghost.span
     else
-      @getImgHeight(scale) + scale / 2
+      res = @getImgHeight(scale) + scale / 2
+    Math.max(res, super(scale))
 
   extendGhost: (circuitArray, i, j) ->
     unless @ghost
       for k in [1...@span]
         circuitArray[i + k][j].push(new QcircuitGui.Drawing.Measure(@content, 0, this))
+
+  eraseGhost: (circuitArray, i, j) ->
+    unless @ghost
+      for k in [1...@span]
+        tmp = new Array()
+        for item in circuitArray[i + k][j]
+          tmp.push(item) unless item instanceof QcircuitGui.Drawing.Measure
+        circuitArray[i + k][j] = tmp
+
+  latexCode: ->
+    if @ghost
+      "\\ghost{#{@content}}"
+    else
+      if @span == 1
+        "\\measure{#{@content}}"
+      else
+        "\\multimeasure{#{@span - 1}}{#{@content}}"

@@ -9,15 +9,20 @@ class LatexController < ApplicationController
       work_dir = Rails.root.join('tmp', 'latex')
       FileUtils.mkpath work_dir
       File.open(work_dir.join(code + '.tex'), 'w') do |f|
+        f.puts '\nonstopmode'
         f.puts '\documentclass[border=1pt,convert={density=1000}]{standalone}'
+        f.puts '\usepackage{amsmath,amsfonts,amsthm,amssymb}'
         f.puts '\newcommand{\bra}[1]{{\left\langle{#1}\right\vert}}'
         f.puts '\newcommand{\ket}[1]{{\left\vert{#1}\right\rangle}}'
         f.puts '\begin{document}'
         f.puts "$#{decode_latex_formula(code)}$"
         f.puts '\end{document}'
       end
-      pdflatex_path = Rails.configuration.latex.pdflatex_path
-      Dir.chdir(work_dir) { system "#{pdflatex_path} -shell-escape #{code}.tex" }
+      exit_status = nil
+      Dir.chdir(work_dir) { exit_status = system "pdflatex -shell-escape #{code}.tex" }
+      unless exit_status
+        return send_file Rails.root.join('public', 'latex', 'invalid.png'), type: 'image/png', disposition: 'inline'
+      end
       FileUtils.cp work_dir.join(code + '.png'), file_path
       FileUtils.rm_r work_dir
     end

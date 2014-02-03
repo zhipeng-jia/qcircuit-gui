@@ -1,30 +1,56 @@
 class QcircuitGui.Drawing.Circuit
-  constructor: ->
-    @content = []
+  constructor: (latexCode) ->
+    @content = @parseLatex(latexCode)
+    rows = @content.length
+    columns = @content[0].length
+    @state = new Array()
+    for i in [0...rows]
+      @state[i] = new Array()
+      for j in [0...columns]
+        @state[i][j] = 'normal'
+    @scale = 0
 
-  draw: (canvas, scale, paddingUp, paddingLeft, callback) ->
-    return if @content.length == 0
+  clone: ->
+    new QcircuitGui.Drawing.Circuit(this.exportToLatex())
 
+  loadResource: (callback) ->
     promises = []
     for i in [0...@content.length]
       for j in [0...@content[0].length]
         for item in @content[i][j]
-          item.load(promises)
+          item.loadResource(promises)
 
-    $.when.apply(null, promises).done =>
-      grid = new QcircuitGui.Drawing.Grid(@content, scale, paddingUp, paddingLeft)
+    if promises.length > 0
+      QcircuitGui.enterProcessing()
+      $.when.apply(null, promises).done =>
+        QcircuitGui.leaveProcessing() if promises.length > 0
+        callback() if callback
+    else
+      callback() if callback
 
-      for i in [0...@content.length]
-        for j in [0...@content[0].length]
-          for item in @content[i][j]
-            item.drawWire(canvas, grid, i, j, scale)
+  buildGrid: (scale) ->
+    if scale != @scale
+      @grid = new QcircuitGui.Drawing.Grid(@content, scale)
+      @scale = scale
 
-      for i in [0...@content.length]
-        for j in [0...@content[0].length]
-          for item in @content[i][j]
-            item.drawEntity(canvas, grid, i, j, scale)
+  draw: (canvas, showGrid) ->
+    canvas.clearCanvas()
+    canvas.prop('width', @grid.getWidth())
+    canvas.prop('height', @grid.getHeight())
 
-      callback()
+    @grid.drawAllCells(canvas) if showGrid
+
+    for i in [0...@content.length]
+      for j in [0...@content[0].length]
+        for item in @content[i][j]
+          item.drawWire(canvas, @grid, i, j, @scale)
+
+    for i in [0...@content.length]
+      for j in [0...@content[0].length]
+        for item in @content[i][j]
+          item.drawEntity(canvas, @grid, i, j, @scale)
+
+    @grid.highlightSpecialCells(canvas, @state) if showGrid
 
   parseParameter: (str, startIndex) ->
     i = startIndex
@@ -47,7 +73,7 @@ class QcircuitGui.Drawing.Circuit
   isWhiteSpace: (ch) ->
     ch == ' ' || ch == '\n' || ch == '\t'
 
-  importFromLatex: (code) ->
+  parseLatex: (code) ->
     res = []
     for line in code.split('\\\\')
       row = []
@@ -123,4 +149,141 @@ class QcircuitGui.Drawing.Circuit
         for item in res[i][j]
           item.extendGhost(res, i, j)
 
-    @content = res
+    res
+
+  exportToLatex: ->
+    rows = @content.length
+    columns = @content[0].length
+
+    res = new Array()
+    flag1 = new Array()
+    flag2 = new Array()
+    for i in [0...rows]
+      res[i] = new Array()
+      flag1[i] = new Array()
+      flag2[i] = new Array()
+      for j in [0...columns]
+        res[i][j] = new Array()
+        flag1[i][j] = false
+        flag2[i][j] = false
+        for item in @content[i][j]
+          continue if item instanceof QcircuitGui.Drawing.QuantumWire
+          continue if item instanceof QcircuitGui.Drawing.ClassicalWire
+          res[i][j].push(item.latexCode())
+          hasWire = true
+          hasWire = false if item instanceof QcircuitGui.Drawing.LeftStick
+          hasWire = false if item instanceof QcircuitGui.Drawing.RightStick
+          hasWire = false if item instanceof QcircuitGui.Drawing.Control && item.isolated
+          flag1[i][j] = true if hasWire
+    for i in [0...rows]
+      for j in [0...columns]
+        for item in @content[i][j]
+          continue unless item instanceof QcircuitGui.Drawing.Control
+          if item.extend < 0
+            for k in [0...item.extend]
+              flag2[i + k][j] = true if 0 <= i + k && i + k < rows
+          else
+            for k in [1..item.extend]
+              flag2[i + k][j] = true if 0 <= i + k && i + k < rows
+
+    for i in [0...rows]
+      needWire = new Array()
+      for j in [0...columns]
+        needWire[j] = false
+      for j in [0...columns]
+        for item in @content[i][j]
+          continue unless item instanceof QcircuitGui.Drawing.QuantumWire
+          continue if item.vertical
+          if item.extend < 0
+            for k in [0...item.extend]
+              needWire[j + k] = true if 0 <= j + k && j + k < columns
+          else
+            for k in [1..item.extend]
+              needWire[j + k] = true if 0 <= j + k && j + k < columns
+      for j in [0...columns]
+        needWire[j] = false if flag1[i][j]
+      j = 0
+      while j < columns
+        if needWire[j]
+          k = j
+          k += 1 while k < columns && needWire[k]
+          res[i][k - 1].push((new QcircuitGui.Drawing.QuantumWire(j - k)).latexCode())
+          j = k
+        else
+          j += 1
+
+    for i in [0...rows]
+      needWire = new Array()
+      for j in [0...columns]
+        needWire[j] = false
+      for j in [0...columns]
+        for item in @content[i][j]
+          continue unless item instanceof QcircuitGui.Drawing.ClassicalWire
+          continue if item.vertical
+          if item.extend < 0
+            for k in [0...item.extend]
+              needWire[j + k] = true if 0 <= j + k && j + k < columns
+          else
+            for k in [1..item.extend]
+              needWire[j + k] = true if 0 <= j + k && j + k < columns
+      j = 0
+      while j < columns
+        if needWire[j]
+          k = j
+          k += 1 while k < columns && needWire[k]
+          res[i][k - 1].push((new QcircuitGui.Drawing.ClassicalWire(j - k)).latexCode())
+          j = k
+        else
+          j += 1
+
+    for i in [0...columns]
+      needWire = new Array()
+      for j in [0...rows]
+        needWire[j] = false
+      for j in [0...rows]
+        for item in @content[j][i]
+          continue unless item instanceof QcircuitGui.Drawing.QuantumWire
+          continue unless item.vertical
+          if item.extend < 0
+            for k in [0...item.extend]
+              needWire[j + k] = true if 0 <= j + k && j + k < rows
+          else
+            for k in [1..item.extend]
+              needWire[j + k] = true if 0 <= j + k && j + k < rows
+      for j in [0...rows]
+        needWire[j] = false if flag2[j][i]
+      j = 0
+      while j < rows
+        if needWire[j]
+          k = j
+          k += 1 while k < rows && needWire[k]
+          res[k - 1][i].push((new QcircuitGui.Drawing.QuantumWire(j - k, true)).latexCode())
+          j = k
+        else
+          j += 1
+
+    for i in [0...columns]
+      needWire = new Array()
+      for j in [0...rows]
+        needWire[j] = false
+      for j in [0...rows]
+        for item in @content[j][i]
+          continue unless item instanceof QcircuitGui.Drawing.ClassicalWire
+          continue unless item.vertical
+          if item.extend < 0
+            for k in [0...item.extend]
+              needWire[j + k] = true if 0 <= j + k && j + k < rows
+          else
+            for k in [1..item.extend]
+              needWire[j + k] = true if 0 <= j + k && j + k < rows
+      j = 0
+      while j < rows
+        if needWire[j]
+          k = j
+          k += 1 while k < rows && needWire[k]
+          res[k - 1][i].push((new QcircuitGui.Drawing.ClassicalWire(j - k, true)).latexCode())
+          j = k
+        else
+          j += 1
+
+    res.map((row) -> row.map((items) -> items.join(' ')).join(' & ')).join('\\\\\n')
