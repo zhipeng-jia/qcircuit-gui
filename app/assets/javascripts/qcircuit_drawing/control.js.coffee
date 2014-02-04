@@ -11,7 +11,7 @@ class QcircuitGui.Drawing.Control extends QcircuitGui.Drawing.BaseEntity
 
   drawEntity: (canvas, grid, x, y, scale) ->
     {x: p, y: q} = grid.getCellCenter(x, y)
-    r = scale / 10
+    r = scale / 15
     if @openBullet
       @drawCircle(canvas, p, q, r, 'white')
       @drawCircularBorder(canvas, p, q, r, @getStandardStrokeWidth(scale), 'black')
