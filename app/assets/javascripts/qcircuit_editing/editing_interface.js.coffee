@@ -8,9 +8,6 @@ class QcircuitGui.Editing.EditingInterface
     @currentCell = {i: -1, j: -1}
     @action = null
 
-    @canvas.bind('mousemove', => @updateDrawing(false))
-    @canvas.bind('mouseleave', => @updateDrawing(false))
-    @canvas.bind('mouseenter', => @updateDrawing(false))
     @canvas.bind('click', @mouseClick)
 
     @circuitList = new Array()
@@ -23,9 +20,6 @@ class QcircuitGui.Editing.EditingInterface
       @circuit.draw(@canvas, @enable)
 
   cleanUp: ->
-    @canvas.unbind('mousemove')
-    @canvas.unbind('mouseleave')
-    @canvas.unbind('mouseenter')
     @canvas.unbind('click')
 
   clearHoverState: ->

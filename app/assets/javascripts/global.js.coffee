@@ -33,6 +33,7 @@ $ ->
   $(document).mousemove (event) ->
     QcircuitGui.Helper.pageX = event.pageX
     QcircuitGui.Helper.pageY = event.pageY
+    QcircuitGui.editingInterface.updateDrawing(false)
 
   QcircuitGui.Helper.latexCode = ''
   $('#latex-content-input').bind 'change keypress paste focus textInput input', ->
