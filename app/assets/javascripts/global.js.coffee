@@ -35,11 +35,11 @@ $ ->
     QcircuitGui.Helper.pageY = event.pageY
 
   QcircuitGui.Helper.latexCode = ''
-  $('#latex-content-input').change ->
+  $('#latex-content-input').bind 'change keypress paste focus textInput input', ->
     QcircuitGui.Helper.latexCode = $(this).val()
 
   QcircuitGui.editingInterface = new QcircuitGui.Editing.EditingInterface(
-    new QcircuitGui.Drawing.Circuit(''), $('#drawing-area'),
+    new QcircuitGui.Drawing.Circuit('& & & & & & \\\\ \\\\ \\\\ \\\\'), $('#drawing-area'),
     parseInt($('#scale-input').val()), $('#enable-editing-check').is(':checked'), circuitChangedCallback)
 
   $("#scale-input").change ->
