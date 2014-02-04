@@ -19,6 +19,9 @@ class QcircuitGui.Drawing.ClassicalWire extends QcircuitGui.Drawing.BaseEntity
       @drawLine(canvas, x1 - offset, y1, x2 - offset, y2, @getStandardStrokeWidth(scale) * 0.8, 'black')
       @drawLine(canvas, x1 + offset, y1, x2 + offset, y2, @getStandardStrokeWidth(scale) * 0.8, 'black')
 
+  getHeight: (scale) ->
+    scale / 3
+
   getWidth: (scale) ->
     scale * 0.5
 

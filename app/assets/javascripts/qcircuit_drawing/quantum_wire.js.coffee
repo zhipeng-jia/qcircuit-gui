@@ -15,6 +15,9 @@ class QcircuitGui.Drawing.QuantumWire extends QcircuitGui.Drawing.BaseEntity
       {x: x2, y: y2} = grid.getCellCenter(x, tmp)
     @drawLine(canvas, x1, y1, x2, y2, @getStandardStrokeWidth(scale), 'black')
 
+  getHeight: (scale) ->
+    scale / 3
+
   getWidth: (scale) ->
     scale * 0.5
 
