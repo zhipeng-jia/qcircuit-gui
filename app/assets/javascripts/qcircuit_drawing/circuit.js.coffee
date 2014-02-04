@@ -1,8 +1,16 @@
 class QcircuitGui.Drawing.Circuit
-  constructor: (latexCode) ->
+  constructor: (latexCode, rows = -1, columns = -1) ->
     @content = @parseLatex(latexCode)
-    rows = @content.length
-    columns = @content[0].length
+    if rows == -1
+      rows = @content.length
+      columns = @content[0].length
+    else
+      @content = new Array()
+      for i in [0...rows]
+        @content[i] = new Array()
+        for j in [0...columns]
+          @content[i][j] = []
+
     @state = new Array()
     for i in [0...rows]
       @state[i] = new Array()
@@ -287,3 +295,4 @@ class QcircuitGui.Drawing.Circuit
           j += 1
 
     res.map((row) -> row.map((items) -> items.join(' ')).join(' & ')).join('\\\\\n')
+    

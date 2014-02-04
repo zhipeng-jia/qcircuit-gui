@@ -46,6 +46,11 @@ class QcircuitGui.Editing.EditingInterface
     @action = action
     @refresh()
 
+  doAction: (action) ->
+    @action.clearState(@circuit) if @action
+    new_circuit = action(@circuit)
+    @addCircuit(new_circuit) if new_circuit
+
   changeEnable: (enable) ->
     @action.clearState(@circuit) if @action
     @action = null

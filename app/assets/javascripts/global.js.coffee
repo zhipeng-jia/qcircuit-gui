@@ -39,7 +39,7 @@ $ ->
     QcircuitGui.Helper.latexCode = $(this).val()
 
   QcircuitGui.editingInterface = new QcircuitGui.Editing.EditingInterface(
-    new QcircuitGui.Drawing.Circuit(''), $('#drawing-area'),
+    new QcircuitGui.Drawing.Circuit('', 3, 8), $('#drawing-area'),
     parseInt($('#scale-input').val()), $('#enable-editing-check').is(':checked'), circuitChangedCallback)
 
   $("#scale-input").change ->
@@ -54,6 +54,9 @@ $ ->
   $('#undo-button').click(-> QcircuitGui.editingInterface.undo())
   $('#redo-button').click(-> QcircuitGui.editingInterface.redo())
 
+  $('#clear-all-button').click(-> QcircuitGui.editingInterface.doAction(QcircuitGui.Editing.clearAll))
+
+
   $('#import-button').click ->
     return unless confirm('This will destroy what you are editing now. Are you sure to do it?')
     $('#enable-editing-check').prop('checked', false)
@@ -63,6 +66,8 @@ $ ->
     QcircuitGui.editingInterface = new QcircuitGui.Editing.EditingInterface(
       new QcircuitGui.Drawing.Circuit($('#latex-code').val()),
       $('#drawing-area'), parseInt($('#scale-input').val()), false, circuitChangedCallback)
+
+
 
   $('#export-button').click ->
     $('#latex-code').val(QcircuitGui.editingInterface.circuit.exportToLatex())
