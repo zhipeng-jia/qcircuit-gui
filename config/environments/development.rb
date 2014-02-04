@@ -29,5 +29,5 @@ QcircuitGui::Application.configure do
 
   # LaTeX config
   config.latex = ActiveSupport::OrderedOptions.new
-  config.latex.pdflatex_path = '/usr/texbin/pdflatex'
+  config.latex.pdflatex_path = 'pdflatex'
 end

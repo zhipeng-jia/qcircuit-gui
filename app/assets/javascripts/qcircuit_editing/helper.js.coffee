@@ -19,3 +19,8 @@ QcircuitGui.Editing.hasMultiEntity = (circuit, i, ignoreFirstRow = false) ->
       return true if item.ghost
       return true if ! ignoreFirstRow && item.span && item.span > 1
   false
+
+QcircuitGui.Editing.clearAll = (circuit) ->
+  rows = circuit.content.length
+  columns = circuit.content[0].length
+  return new QcircuitGui.Drawing.Circuit('', rows, columns)

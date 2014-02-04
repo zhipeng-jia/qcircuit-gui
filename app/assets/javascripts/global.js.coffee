@@ -40,7 +40,7 @@ $ ->
     QcircuitGui.Helper.latexCode = $(this).val()
 
   QcircuitGui.editingInterface = new QcircuitGui.Editing.EditingInterface(
-    new QcircuitGui.Drawing.Circuit('& & & & & & \\\\ \\\\ \\\\ \\\\'), $('#drawing-area'),
+    new QcircuitGui.Drawing.Circuit('', 3, 8), $('#drawing-area'),
     parseInt($('#scale-input').val()), $('#enable-editing-check').is(':checked'), circuitChangedCallback)
 
   $("#scale-input").change ->
@@ -73,3 +73,5 @@ $ ->
     $(this).addClass('active')
     action = new QcircuitGui.Editing[$(this).data('actionName')]
     QcircuitGui.editingInterface.changeAction(action)
+
+  $('#clear-all-button').click(-> QcircuitGui.editingInterface.doAction(QcircuitGui.Editing.clearAll))
