@@ -32,3 +32,4 @@ class QcircuitGui.Editing.SelectRow
   clearState: (circuit) ->
     if @clickedCell
       circuit.state[@clickedCell.i][@clickedCell.j] = 'normal'
+

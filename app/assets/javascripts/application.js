@@ -42,16 +42,9 @@
 //= require ./qcircuit_editing/add_quantum_wire.js.coffee
 //= require ./qcircuit_editing/add_classical_wire.js.coffee
 //= require ./qcircuit_editing/add_multirow_component.js.coffee
-//= require ./qcircuit_editing/add_measure_tab.js.coffee
-//= require ./qcircuit_editing/add_meter.js.coffee
-//= require ./qcircuit_editing/add_target_gate.js.coffee
-//= require ./qcircuit_editing/add_qswap.js.coffee
+//= require ./qcircuit_editing/add_single_cell_component.js.coffee
 //= require ./qcircuit_editing/add_ctrl.js.coffee
 //= require ./qcircuit_editing/add_ctrlo.js.coffee
-//= require ./qcircuit_editing/add_control.js.coffee
-//= require ./qcircuit_editing/add_controlo.js.coffee
-//= require ./qcircuit_editing/add_left_stick.js.coffee
-//= require ./qcircuit_editing/add_right_stick.js.coffee
 
 //= require ./qcircuit_editing/add_row.js.coffee
 //= require ./qcircuit_editing/add_column.js.coffee
