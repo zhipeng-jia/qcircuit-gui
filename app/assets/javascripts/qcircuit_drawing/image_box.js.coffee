@@ -12,6 +12,7 @@ class QcircuitGui.Drawing.ImageBox extends QcircuitGui.Drawing.BaseEntity
       d = $.Deferred()
       @img = new Image()
       @img.onload = d.resolve
+      @img.onerror = => @img.src = @imgUrl + '?' + new Date().getTime()
       promises.push(d)
       @img.src = @imgUrl
 

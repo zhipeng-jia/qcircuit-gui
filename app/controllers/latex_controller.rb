@@ -6,7 +6,7 @@ class LatexController < ApplicationController
     file_path = Rails.root.join('public', 'latex', 'formula', "#{code}.png").to_s
     FileUtils.mkpath Rails.root.join('public', 'latex', 'formula')
     unless File.exists? file_path
-      work_dir = Rails.root.join('tmp', 'latex')
+      work_dir = Rails.root.join('tmp', 'latex', SecureRandom.hex(10))
       FileUtils.mkpath work_dir
       File.open(work_dir.join(code + '.tex'), 'w') do |f|
         f.puts '\nonstopmode'
@@ -21,6 +21,7 @@ class LatexController < ApplicationController
       exit_status = nil
       Dir.chdir(work_dir) { exit_status = system "pdflatex -shell-escape #{code}.tex" }
       unless exit_status
+        FileUtils.rm_r work_dir
         return send_file Rails.root.join('public', 'latex', 'invalid.png'), type: 'image/png', disposition: 'inline'
       end
       FileUtils.cp work_dir.join(code + '.png'), file_path
