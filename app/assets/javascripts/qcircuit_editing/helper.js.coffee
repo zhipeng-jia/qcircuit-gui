@@ -25,21 +25,23 @@ QcircuitGui.Editing.clearAll = (circuit) ->
   columns = circuit.content[0].length
   return new QcircuitGui.Drawing.Circuit('', rows, columns)
 
-QcircuitGui.Helper.checkParenthesisMatching = (str) ->
+QcircuitGui.Editing.checkParenthesisMatching = (str) ->
   i = 0
   stack = ''
-  opening = ['[', '{']
-  closing = [']', '}']
-  matching = {'}' : '{', ']' : '['}
+  opening = ['[', '{', '(']
+  closing = [']', '}', ')']
+  matching = {'}' : '{', ']' : '[', ')' : '('}
   previousChar = null
   ret = true
   for char in str
-    if char in opening
-      stack += char
-    if char in closing
-      if stack.length == 0 || stack[stack.length - 1] != matching[char]
-        ret = false
-      stack = stack.substr(0, stack.length - 1)
+    if previousChar != '\\'
+      if char in opening
+        stack += char
+      if char in closing
+        if stack.length == 0 || stack[stack.length - 1] != matching[char]
+          ret = false
+        stack = stack.substr(0, stack.length - 1)
+    previousChar = char
   if stack.length != 0
     ret = false
   ret

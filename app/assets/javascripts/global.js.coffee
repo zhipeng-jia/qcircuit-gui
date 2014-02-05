@@ -37,7 +37,7 @@ $ ->
 
   QcircuitGui.Helper.latexCode = ''
   $('#latex-content-input').bind 'change keypress paste focus textInput input', ->
-      QcircuitGui.Helper.latexCode = if QcircuitGui.Helper.checkParenthesisMatching($(this).val()) then $(this).val() else ''
+      QcircuitGui.Helper.latexCode = if QcircuitGui.Editing.checkParenthesisMatching($(this).val()) then $(this).val() else ''
 
   
   QcircuitGui.editingInterface = new QcircuitGui.Editing.EditingInterface(
