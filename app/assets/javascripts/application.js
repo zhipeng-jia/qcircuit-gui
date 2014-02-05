@@ -43,8 +43,6 @@
 //= require ./qcircuit_editing/add_classical_wire.js.coffee
 //= require ./qcircuit_editing/add_multirow_component.js.coffee
 //= require ./qcircuit_editing/add_single_cell_component.js.coffee
-//= require ./qcircuit_editing/add_ctrl.js.coffee
-//= require ./qcircuit_editing/add_ctrlo.js.coffee
 
 //= require ./qcircuit_editing/add_row.js.coffee
 //= require ./qcircuit_editing/add_column.js.coffee

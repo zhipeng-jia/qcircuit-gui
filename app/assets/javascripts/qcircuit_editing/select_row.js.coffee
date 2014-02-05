@@ -1,30 +1,33 @@
 class QcircuitGui.Editing.SelectRow
-  constuctor: ->
+  constructor: ->
     @clickedCell = null
 
+  checkFirstClick: (circuit, i, j) ->
+    true
+
+  checkSecondClick: (circuit, i, j) ->
+    j == @clickedCell.j
+
   getHoverState: (circuit, i, j) ->
-    res = 'hover'
     if @clickedCell
       if i == @clickedCell.i && j == @clickedCell.j
-        res = 'selected'
-      if j != @clickedCell.j
-        res = 'hover_warning'
-    res
+        return 'selected'
+      else
+        return if @checkSecondClick(circuit, i, j) then 'hover' else 'hover_warning'
+    else
+      return if @checkFirstClick(circuit, i, j) then 'hover' else 'hover_warning'
+
 
   mouseClick: (circuit, i, j) ->
     if @clickedCell
-      if j != @clickedCell.j
-        return null
-      else
-        newCircuit = circuit.clone()
-        if @operate(newCircuit, @clickedCell.i, @clickedCell.j, i - @clickedCell.i)
-          circuit.state[@clickedCell.i][@clickedCell.j] = 'normal'
-          @clickedCell = null
-          return newCircuit
-        else
-          return null
+      return null unless @checkSecondClick(circuit, i, j)
+      newCircuit = circuit.clone()
+      @operate(newCircuit, @clickedCell.i, @clickedCell.j, i - @clickedCell.i)
+      circuit.state[@clickedCell.i][@clickedCell.j] = 'normal'
+      @clickedCell = null
+      return newCircuit
     else
-      if @check(circuit, i, j)
+      if @checkFirstClick(circuit, i, j)
         @clickedCell = {i: i, j: j}
         circuit.state[i][j] = 'selected'
       return null
@@ -32,4 +35,15 @@ class QcircuitGui.Editing.SelectRow
   clearState: (circuit) ->
     if @clickedCell
       circuit.state[@clickedCell.i][@clickedCell.j] = 'normal'
+#???? @clickedCell = null
 
+class QcircuitGui.Editing.AddCtrl extends QcircuitGui.Editing.SelectRow
+  operate: (circuit, i, j, extend) ->
+    QcircuitGui.Editing.eraseContent(circuit, i, j)
+    circuit.content[i][j].push(new QcircuitGui.Drawing.Control(extend))
+
+
+class QcircuitGui.Editing.AddCtrlO extends QcircuitGui.Editing.SelectRow
+  operate: (circuit, i, j, extend) ->
+    QcircuitGui.Editing.eraseContent(circuit, i, j)
+    circuit.content[i][j].push(new QcircuitGui.Drawing.Control(extend, true))
