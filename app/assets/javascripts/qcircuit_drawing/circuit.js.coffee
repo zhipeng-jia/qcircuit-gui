@@ -152,6 +152,8 @@ class QcircuitGui.Drawing.Circuit
                 items.push(new QcircuitGui.Drawing.LeftStick(para1))
               when 'rstick'
                 items.push(new QcircuitGui.Drawing.RightStick(para1))
+              when 'ghost'
+
               else
                 throw "Unknown command \"#{cmd}\""
         catch error

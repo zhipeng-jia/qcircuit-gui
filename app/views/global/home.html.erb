@@ -6,9 +6,11 @@
     <input id="enable-editing-check" type="checkbox" checked="checked"> Enable editing
   </label>
   <input id="scale-input" type="range" min="50" max="160" step="5" value="70">
-  <input id="latex-content-input" type="text" class="form-control for-editing" placeholder="LaTeX code">
+  <div id="latex-code-state" style="display: inline;">
+    <input id="latex-content-input" type="text" class="form-control for-editing" placeholder="LaTeX code">
+  </div>
 </div>
-<div id="second-block" class="block">
+<div id="second-block" class="block control">
   <div class="btn-group">
     <button id="q-wire-button" type="button" class="btn btn-default for-editing editing-action"
             data-action-name="AddQuantumWire">Q-wire</button>

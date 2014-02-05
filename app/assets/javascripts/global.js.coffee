@@ -37,8 +37,13 @@ $ ->
 
   QcircuitGui.Helper.latexCode = ''
   $('#latex-content-input').bind 'change keypress paste focus textInput input', ->
-      QcircuitGui.Helper.latexCode = if QcircuitGui.Editing.checkParenthesisMatching($(this).val()) then $(this).val() else ''
-
+      matched = QcircuitGui.Editing.checkParenthesisMatching($(this).val())
+      QcircuitGui.Helper.latexCode = if matched then $(this).val() else ''
+      if not matched
+        $('#latex-code-state').addClass('has-warning')
+      else
+        $('#latex-code-state').removeClass('has-warning')
+      QcircuitGui.editingInterface.refresh()
   
   QcircuitGui.editingInterface = new QcircuitGui.Editing.EditingInterface(
     new QcircuitGui.Drawing.Circuit('', 3, 8), $('#drawing-area'),
@@ -80,3 +85,4 @@ $ ->
     QcircuitGui.editingInterface.changeAction(action)
 
   $('#clear-all-button').click(-> QcircuitGui.editingInterface.doAction(QcircuitGui.Editing.clearAll))
+

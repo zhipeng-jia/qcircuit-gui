@@ -41,9 +41,7 @@
 
 //= require ./qcircuit_editing/add_quantum_wire.js.coffee
 //= require ./qcircuit_editing/add_classical_wire.js.coffee
-//= require ./qcircuit_editing/add_gate.js.coffee
-//= require ./qcircuit_editing/add_measure.js.coffee
-//= require ./qcircuit_editing/add_measure_d.js.coffee
+//= require ./qcircuit_editing/add_multirow_component.js.coffee
 //= require ./qcircuit_editing/add_measure_tab.js.coffee
 //= require ./qcircuit_editing/add_meter.js.coffee
 //= require ./qcircuit_editing/add_target_gate.js.coffee
