@@ -1,5 +1,5 @@
 class QcircuitGui.Editing.SelectRowOrColumn
-  constuctor: ->
+  constructor: ->
     @clickedCell = null
 
   getHoverState: (circuit, i, j) ->

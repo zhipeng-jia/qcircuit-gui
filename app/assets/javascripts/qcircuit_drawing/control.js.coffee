@@ -1,4 +1,4 @@
-class QcircuitGui.Drawing.Control extends QcircuitGui.Drawing.BaseEntity
+class QcircuitGui.Drawing.Control extends QcircuitGui.Drawing.BaseComponent
   constructor: (extend, openBullet = false, isolated = false) ->
     @openBullet = openBullet
     @isolated = isolated
@@ -11,7 +11,7 @@ class QcircuitGui.Drawing.Control extends QcircuitGui.Drawing.BaseEntity
 
   drawEntity: (canvas, grid, x, y, scale) ->
     {x: p, y: q} = grid.getCellCenter(x, y)
-    r = scale / 15
+    r = scale / 13
     if @openBullet
       @drawCircle(canvas, p, q, r, 'white')
       @drawCircularBorder(canvas, p, q, r, @getStandardStrokeWidth(scale), 'black')

@@ -1,11 +1,12 @@
-class QcircuitGui.Drawing.TargetGate extends QcircuitGui.Drawing.BaseEntity
+class QcircuitGui.Drawing.TargetGate extends QcircuitGui.Drawing.BaseComponent
   drawEntity: (canvas, grid, x, y, scale) ->
     {x: p, y: q} = grid.getCellCenter(x, y)
-    r = scale / 8
+    r = scale / 6
     @drawCircle(canvas, p, q, r, 'white')
-    @drawCircularBorder(canvas, p, q, r, @getStandardStrokeWidth(scale), 'black')
-    @drawLine(canvas, p, q - r, p, q + r, @getStandardStrokeWidth(scale), 'black')
-    @drawLine(canvas, p - r, q, p + r, q, @getStandardStrokeWidth(scale), 'black')
+    strokeWidth = @getStandardStrokeWidth(scale)
+    @drawCircularBorder(canvas, p, q, r, strokeWidth, 'black')
+    @drawLine(canvas, p, q - r, p, q + r, strokeWidth, 'black')
+    @drawLine(canvas, p - r, q, p + r, q, strokeWidth, 'black')
 
   latexCode: ->
     "\\targ"

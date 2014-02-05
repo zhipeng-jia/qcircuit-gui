@@ -16,8 +16,9 @@
 //= require ./global.js.coffee
 
 //= require ./qcircuit_drawing/basic_drawing.js.coffee
-//= require ./qcircuit_drawing/base_entity.js.coffee
-//= require ./qcircuit_drawing/image_box.js.coffee
+//= require ./qcircuit_drawing/base_component.js.coffee
+//= require ./qcircuit_drawing/latex_code_image.js.coffee
+//= require ./qcircuit_drawing/multi_row_component.js.coffee
 
 //= require ./qcircuit_drawing/quantum_wire.js.coffee
 //= require ./qcircuit_drawing/classical_wire.js.coffee
