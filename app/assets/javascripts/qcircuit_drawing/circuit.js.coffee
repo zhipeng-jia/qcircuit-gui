@@ -70,12 +70,17 @@ class QcircuitGui.Drawing.Circuit
     else
       y = ']'
     i += 1
-    until str.charAt(i) == y && top == 0
-      top += 1 if str.charAt(i) == x
-      top -= 1 if str.charAt(i) == y
+    previousChar = null
+    until i >= str.length || (previousChar != '\\' && str.charAt(i) == y && top == 0)
+      top += 1 if previousChar != '\\' && str.charAt(i) == x
+      top -= 1 if previousChar != '\\' && str.charAt(i) == y
       content += str.charAt(i)
+      previousChar = str.charAt(i)
       i += 1
+    if top != 0 || i >= str.length
+      throw "#{x} and #{y} do not match"
     i += 1
+
     { endIndex: i, content: content }
 
   isWhiteSpace: (ch) ->
@@ -88,61 +93,69 @@ class QcircuitGui.Drawing.Circuit
       for cell in line.split('&')
         items = []
         i = 0
-        while i < cell.length
-          i += 1 while @isWhiteSpace(cell.charAt(i)) && i < cell.length
-          break if i >= cell.length
-          cmd = ''
-          i += 1
-          until cell.charAt(i) == '{' || cell.charAt(i) == '[' || @isWhiteSpace(cell.charAt(i)) || i >= cell.length
-            cmd += cell.charAt(i)
+        cellInfo = "In \"#{cell}\" at (row #{res.length + 1}, col #{row.length + 1}) :\n  "
+        try
+          while i < cell.length
+            i += 1 while @isWhiteSpace(cell.charAt(i)) && i < cell.length
+            break if i >= cell.length
+            cmd = ''
+            if cell.charAt(i) != '\\'
+              throw "Each cell should start with a '\\'"
             i += 1
-          para1 = null
-          para2 = null
-          if i < cell.length && (cell.charAt(i) == '{' || cell.charAt(i) == '[')
-            { endIndex: i, content: para1 } = @parseParameter(cell, i)
-          if i < cell.length && (cell.charAt(i) == '{' || cell.charAt(i) == '[')
-            { endIndex: i, content: para2 } = @parseParameter(cell, i)
-          switch cmd
-            when 'qw'
-              items.push(new QcircuitGui.Drawing.QuantumWire(parseInt(para1 ? '-1')))
-            when 'qwx'
-              items.push(new QcircuitGui.Drawing.QuantumWire(parseInt(para1 ? '-1'), true))
-            when 'cw'
-              items.push(new QcircuitGui.Drawing.ClassicalWire(parseInt(para1 ? '-1')))
-            when 'cwx'
-              items.push(new QcircuitGui.Drawing.ClassicalWire(parseInt(para1 ? '-1'), true))
-            when 'gate'
-              items.push(new QcircuitGui.Drawing.Gate(para1))
-            when 'targ'
-              items.push(new QcircuitGui.Drawing.TargetGate())
-            when 'qswap'
-              items.push(new QcircuitGui.Drawing.Qswap())
-            when 'multigate'
-              items.push(new QcircuitGui.Drawing.Gate(para2, parseInt(para1) + 1))
-            when 'ctrl'
-              items.push(new QcircuitGui.Drawing.Control(parseInt(para1)))
-            when 'ctrlo'
-              items.push(new QcircuitGui.Drawing.Control(parseInt(para1), true))
-            when 'control'
-              items.push(new QcircuitGui.Drawing.Control(0, false, true))
-            when 'controlo'
-              items.push(new QcircuitGui.Drawing.Control(0, true, true))
-            when 'meter'
-              items.push(new QcircuitGui.Drawing.Meter())
-            when 'measure'
-              items.push(new QcircuitGui.Drawing.Measure(para1))
-            when 'measureD'
-              items.push(new QcircuitGui.Drawing.MeasureD(para1))
-            when 'measuretab'
-              items.push(new QcircuitGui.Drawing.MeasureTab(para1))
-            when 'multimeasure'
-              items.push(new QcircuitGui.Drawing.Measure(para2, parseInt(para1) + 1))
-            when 'multimeasureD'
-              items.push(new QcircuitGui.Drawing.MeasureD(para2, parseInt(para1) + 1))
-            when 'lstick'
-              items.push(new QcircuitGui.Drawing.LeftStick(para1))
-            when 'rstick'
-              items.push(new QcircuitGui.Drawing.RightStick(para1))
+            until cell.charAt(i) == '{' || cell.charAt(i) == '[' || @isWhiteSpace(cell.charAt(i)) || i >= cell.length
+              cmd += cell.charAt(i)
+              i += 1
+            para1 = null
+            para2 = null
+            if i < cell.length && (cell.charAt(i) == '{' || cell.charAt(i) == '[')
+              { endIndex: i, content: para1 } = @parseParameter(cell, i)
+            if i < cell.length && (cell.charAt(i) == '{' || cell.charAt(i) == '[')
+              { endIndex: i, content: para2 } = @parseParameter(cell, i)
+            switch cmd
+              when 'qw'
+                items.push(new QcircuitGui.Drawing.QuantumWire(parseInt(para1 ? '-1')))
+              when 'qwx'
+                items.push(new QcircuitGui.Drawing.QuantumWire(parseInt(para1 ? '-1'), true))
+              when 'cw'
+                items.push(new QcircuitGui.Drawing.ClassicalWire(parseInt(para1 ? '-1')))
+              when 'cwx'
+                items.push(new QcircuitGui.Drawing.ClassicalWire(parseInt(para1 ? '-1'), true))
+              when 'gate'
+                items.push(new QcircuitGui.Drawing.Gate(para1))
+              when 'targ'
+                items.push(new QcircuitGui.Drawing.TargetGate())
+              when 'qswap'
+                items.push(new QcircuitGui.Drawing.Qswap())
+              when 'multigate'
+                items.push(new QcircuitGui.Drawing.Gate(para2, parseInt(para1) + 1))
+              when 'ctrl'
+                items.push(new QcircuitGui.Drawing.Control(parseInt(para1)))
+              when 'ctrlo'
+                items.push(new QcircuitGui.Drawing.Control(parseInt(para1), true))
+              when 'control'
+                items.push(new QcircuitGui.Drawing.Control(0, false, true))
+              when 'controlo'
+                items.push(new QcircuitGui.Drawing.Control(0, true, true))
+              when 'meter'
+                items.push(new QcircuitGui.Drawing.Meter())
+              when 'measure'
+                items.push(new QcircuitGui.Drawing.Measure(para1))
+              when 'measureD'
+                items.push(new QcircuitGui.Drawing.MeasureD(para1))
+              when 'measuretab'
+                items.push(new QcircuitGui.Drawing.MeasureTab(para1))
+              when 'multimeasure'
+                items.push(new QcircuitGui.Drawing.Measure(para2, parseInt(para1) + 1))
+              when 'multimeasureD'
+                items.push(new QcircuitGui.Drawing.MeasureD(para2, parseInt(para1) + 1))
+              when 'lstick'
+                items.push(new QcircuitGui.Drawing.LeftStick(para1))
+              when 'rstick'
+                items.push(new QcircuitGui.Drawing.RightStick(para1))
+              else
+                throw "Unknown command \"#{cmd}\""
+        catch error
+          throw cellInfo + error
         row.push(items)
       res.push(row)
 

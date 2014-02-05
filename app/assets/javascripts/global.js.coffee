@@ -37,8 +37,9 @@ $ ->
 
   QcircuitGui.Helper.latexCode = ''
   $('#latex-content-input').bind 'change keypress paste focus textInput input', ->
-    QcircuitGui.Helper.latexCode = $(this).val()
+      QcircuitGui.Helper.latexCode = if QcircuitGui.Helper.checkParenthesisMatching($(this).val()) then $(this).val() else ''
 
+  
   QcircuitGui.editingInterface = new QcircuitGui.Editing.EditingInterface(
     new QcircuitGui.Drawing.Circuit('', 3, 8), $('#drawing-area'),
     parseInt($('#scale-input').val()), $('#enable-editing-check').is(':checked'), circuitChangedCallback)
@@ -61,10 +62,14 @@ $ ->
     $('.editing-action').removeClass('active')
     $('.for-editing').prop('disabled', true)
     QcircuitGui.editingInterface.cleanUp()
-    QcircuitGui.editingInterface = new QcircuitGui.Editing.EditingInterface(
-      new QcircuitGui.Drawing.Circuit($('#latex-code').val()),
-      $('#drawing-area'), parseInt($('#scale-input').val()), false, circuitChangedCallback)
 
+    try
+      QcircuitGui.editingInterface = new QcircuitGui.Editing.EditingInterface(
+        new QcircuitGui.Drawing.Circuit($('#latex-code').val()),
+        $('#drawing-area'), parseInt($('#scale-input').val()), false, circuitChangedCallback)
+    catch error
+      alert(error)
+   
   $('#export-button').click ->
     $('#latex-code').val(QcircuitGui.editingInterface.circuit.exportToLatex())
 
