@@ -4,7 +4,7 @@ class QcircuitGui.Editing.AddLeftStick
     'hover'
 
   mouseClick: (circuit, i, j) ->
-    return false if QcircuitGui.Helper.latexCode.length == 0
+    return null if QcircuitGui.Helper.latexCode.length == 0
     newCircuit = circuit.clone()
     QcircuitGui.Editing.eraseContent(newCircuit, i, j)
     newCircuit.content[i][j].push(new QcircuitGui.Drawing.LeftStick(QcircuitGui.Helper.latexCode))
