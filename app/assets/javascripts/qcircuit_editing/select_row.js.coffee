@@ -6,7 +6,7 @@ class QcircuitGui.Editing.SelectRow
     true
 
   checkSecondClick: (circuit, i, j) ->
-    j == @clickedCell.j
+    [i, j] != [@clickedCell.i, @clickedCell.j] && j == @clickedCell.j
 
   getHoverState: (circuit, i, j) ->
     if @clickedCell

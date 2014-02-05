@@ -15,7 +15,6 @@ class QcircuitGui.Editing.AddMultirowComponent extends QcircuitGui.Editing.Selec
     newItem.extendGhost(circuit.content, i, j)
     true
 
-
   checkFirstClick: (circuit, i, j) ->
     QcircuitGui.Helper.latexCode.length > 0 && super(circuit, i, j)
 
