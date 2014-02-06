@@ -1,4 +1,4 @@
-class QcircuitGui.Drawing.MeasureTab extends QcircuitGui.Drawing.ImageBox
+class QcircuitGui.Drawing.MeasureTab extends QcircuitGui.Drawing.BaseComponent
   constructor: (content) ->
     @content = content
     @img = new QcircuitGui.Drawing.LatexCodeImage(content)
