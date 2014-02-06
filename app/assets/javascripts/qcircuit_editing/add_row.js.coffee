@@ -1,10 +1,10 @@
 class QcircuitGui.Editing.AddRow
   getHoverState: (circuit, i, j) ->
-    return 'hover_warning' if i + 1 < circuit.content.length &&  QcircuitGui.Editing.hasMultiEntity(circuit, i + 1, true)
+    return 'hover_warning' if i + 1 < circuit.content.length &&  QcircuitGui.Editing.hasMultiRowComponent(circuit, i + 1, true)
     'hover'
 
   mouseClick: (circuit, i, j) ->
-    return null if i + 1 < circuit.content.length &&  QcircuitGui.Editing.hasMultiEntity(circuit, i + 1, true)
+    return null if i + 1 < circuit.content.length &&  QcircuitGui.Editing.hasMultiRowComponent(circuit, i + 1, true)
     newCircuit = circuit.clone()
     columns = newCircuit.content[0].length
     tmp1 = new Array()

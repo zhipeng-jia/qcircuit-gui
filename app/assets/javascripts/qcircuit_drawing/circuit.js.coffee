@@ -170,7 +170,7 @@ class QcircuitGui.Drawing.Circuit
     for i in [0...res.length]
       for j in [0...m]
         for item in res[i][j]
-          item.extendGhost(res, i, j)
+          item.extendGhost(res, i, j) if item.extendGhost
 
     res
 

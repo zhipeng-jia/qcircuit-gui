@@ -1,4 +1,4 @@
-class QcircuitGui.Drawing.Meter extends QcircuitGui.Drawing.BaseEntity
+class QcircuitGui.Drawing.Meter extends QcircuitGui.Drawing.BaseComponent
   drawEntity: (canvas, grid, x, y, scale) ->
     {x: p, y: q} = grid.getCellCenter(x, y)
     w = scale * 0.75

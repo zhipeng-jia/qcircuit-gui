@@ -1,4 +1,4 @@
-class QcircuitGui.Drawing.ClassicalWire extends QcircuitGui.Drawing.BaseEntity
+class QcircuitGui.Drawing.ClassicalWire extends QcircuitGui.Drawing.BaseComponent
   constructor: (extend = -1, vertical = false) ->
     @extend = extend
     @vertical = vertical
