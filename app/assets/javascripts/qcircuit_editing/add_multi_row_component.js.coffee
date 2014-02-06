@@ -1,4 +1,4 @@
-class QcircuitGui.Editing.AddMultirowComponent extends QcircuitGui.Editing.SelectRow
+class QcircuitGui.Editing.AddMultiRowComponent extends QcircuitGui.Editing.SelectRow
   getHoverState: (circuit, i, j) ->
     return 'hover_warning' if QcircuitGui.Helper.latexCode.length == 0
     super(circuit, i, j)
@@ -23,17 +23,17 @@ class QcircuitGui.Editing.AddMultirowComponent extends QcircuitGui.Editing.Selec
 
   
 
-class QcircuitGui.Editing.AddMeasure extends QcircuitGui.Editing.AddMultirowComponent
+class QcircuitGui.Editing.AddMeasure extends QcircuitGui.Editing.AddMultiRowComponent
   constructor: ->
     @targetClass = QcircuitGui.Drawing.Measure
     super()
 
-class QcircuitGui.Editing.AddMeasureD extends QcircuitGui.Editing.AddMultirowComponent
+class QcircuitGui.Editing.AddMeasureD extends QcircuitGui.Editing.AddMultiRowComponent
   constructor: ->
     @targetClass = QcircuitGui.Drawing.MeasureD
     super()
 
-class QcircuitGui.Editing.AddGate extends QcircuitGui.Editing.AddMultirowComponent
+class QcircuitGui.Editing.AddGate extends QcircuitGui.Editing.AddMultiRowComponent
   constructor: ->
     @targetClass = QcircuitGui.Drawing.Gate
     super()

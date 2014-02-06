@@ -41,7 +41,7 @@
 //= require ./qcircuit_editing/select_row.js.coffee
 
 //= require ./qcircuit_editing/add_wire.js.coffee
-//= require ./qcircuit_editing/add_multirow_component.js.coffee
+//= require qcircuit_editing/add_multi_row_component.js.coffee
 //= require ./qcircuit_editing/add_single_cell_component.js.coffee
 
 //= require ./qcircuit_editing/add_row.js.coffee
