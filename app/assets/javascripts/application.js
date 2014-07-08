@@ -10,7 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery-1.11.0.js
+//= require jquery-2.1.1.min.js
 //= require bootstrap.js
 //= require jcanvas.js
 //= require global.js.coffee

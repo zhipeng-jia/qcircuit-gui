@@ -20,3 +20,4 @@ config/initializers/secret_token.rb
 /public/latex/formula/*
 /.idea
 /config/database.yml
+/config/secrets.yml
