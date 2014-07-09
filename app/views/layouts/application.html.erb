@@ -6,7 +6,7 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body style="background:url('ricepaper.png') repeat">
+<body style="background: url(ricepaper.png) repeat">
 
   <div id="main-container">
     <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
@@ -39,13 +39,11 @@
         </nav>
       </div>
     </header>
-
+  </div>
   <div class="<%= controller.controller_name %>">
     <div class="<%= controller.action_name %>">
       <%= yield %>
     </div>
   </div>
-</div>
-
 </body>
 </html>

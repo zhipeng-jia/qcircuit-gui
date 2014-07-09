@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .global .home {
   .block {
-    margin: 20px;
+//    margin: 20px 5px;
   }
   #first-block {
     #latex-content-input, #scale-input {
@@ -22,7 +22,7 @@
       float: left;
     }
     .right-part {
-      margin: 0 20px;
+      margin: 0 10px;
     }
   }
   #processing-screen {
@@ -48,3 +48,39 @@
     }
   }
 }
+
+
+header {
+  background-color: #ada
+}
+
+h1 {
+  font-size: 50px;
+  text-shadow: 3px 3px 5px hsla(0, 100%, 0%, 0.3);
+  margin: 10px 0px 0px;
+}
+
+h2 {
+  margin: 0px 0px;
+  font-size: 30px;
+  text-shadow: 3px 3px 3px hsla(0, 0%, 0%, 0.3);
+}
+
+body {
+
+}
+
+.row {
+  width:1170px;
+  margin: 25px auto 10px;
+}
+
+.tool-bar {
+  box-shadow: 0 0 15px #898;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+/*
+background pattern from subtlepatterns.com
+*/
