@@ -6,90 +6,96 @@
 </div>
 
 <div class="row">
-  <div id="second-block" class="block col-md-1">
-    <div id="latex-code-state" class="btn-group-vertical tool-bar" >
-      <button id="q-wire-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddQuantumWire">Q-wire</button>
-      <button id="gate-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddGate">Gate</button>
-      <button id="ctrl-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddCtrl">Ctrl</button>
-      <button id="ctrlo-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddCtrlO">CtrlO</button>
-      <button id="control-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddControl">Control</button>
-      <button id="controlo-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddControlO">ControlO</button>
-      <button id="c-wire-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddClassicalWire">C-wire</button>
-      <button id="meter-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddMeter">Meter</button>
-      <button id="target-gate-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddTargetGate">TargetGate</button>
-      <button id="measure-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddMeasure">Measure</button>
-      <button id="measure-d-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddMeasureD">MeasureD</button>
-      <button id="measure-tab-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddMeasureTab">MeasureTab</button>
-      <button id="q-swap-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddQswap">Q-swap</button>
-      <button id="l-stick-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddLeftStick">L-stick</button>
-      <button id="r-stick-button" type="button" class="btn btn-default for-editing editing-action"
-              data-action-name="AddRightStick">R-stick</button>
-      <br>
-      <input id="latex-content-input" type="text" class="form-control for-editing" placeholder="LaTeX code">
+  <div id="element-block" class="col-md-1">
+    <div>
+      <div id="latex-code-state" class="btn-group-vertical first-row block" style="width:117px">
+        <button id="q-wire-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddQuantumWire">Q-wire</button>
+        <button id="gate-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddGate">Gate</button>
+        <button id="ctrl-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddCtrl">Ctrl</button>
+        <button id="ctrlo-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddCtrlO">CtrlO</button>
+        <button id="control-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddControl">Control</button>
+        <button id="controlo-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddControlO">ControlO</button>
+        <button id="c-wire-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddClassicalWire">C-wire</button>
+        <button id="meter-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddMeter">Meter</button>
+        <button id="target-gate-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddTargetGate">TargetGate</button>
+        <button id="measure-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddMeasure">Measure</button>
+        <button id="measure-d-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddMeasureD">MeasureD</button>
+        <button id="measure-tab-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddMeasureTab">MeasureTab</button>
+        <button id="q-swap-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddQswap">Q-swap</button>
+        <button id="l-stick-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddLeftStick">L-stick</button>
+        <button id="r-stick-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddRightStick">R-stick</button>
+        <br>
+        <input id="latex-content-input" type="text" class="form-control for-editing" placeholder="LaTeX code">
+      </div>
     </div>
   </div>
-  <div class="block col-md-8" style="margin-left: 30px; ">
-    <div style="height: 559px; width: 810px; border-radius: 5px; box-shadow: 0px 0px 10px hsla(0, 0%, 0%, 0.4); background-color: rgba(255, 255, 255, 0.3)">
+  <div class="col-md-8" style="margin-left: 30px; ">
+    <div class="first-row" style="width: 810px; border-radius: 5px; box-shadow: 0px 0px 10px hsla(0, 0%, 0%, 0.4); background-color: rgba(255, 255, 255, 0.3)">
       <canvas id="drawing-area" style=""></canvas>
     </div>
   </div>
   
-  <div class="block col-md-2">
-    <div id="third-block" class="block" style="margin:0px 40px">
-      <div class="btn-group-vertical tool-bar">
-        <a id="undo-button" href="#" class="btn btn-default for-editing">Undo</a>
-        <a id="redo-button" href="#" class="btn btn-default for-editing">Redo</a>
+  <div class="col-md-2">
+    <div style="margin:0px 40px">
+      <div class="btn-group-vertical block first-row">
+        <button id="undo-button" class="btn btn-default for-editing">Undo</a>
+        <button id="redo-button" class="btn btn-default for-editing">Redo</a>
         <button id="add-row-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddRow">Add a row after</button>
+                data-action-name="AddRow">Add a row</button>
         <button id="add-column-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddColumn">Add a column after</button>
+                data-action-name="AddColumn">Add a column</button>
         <button id="delete-row-button" type="button" class="btn btn-default for-editing editing-action"
                 data-action-name="DeleteRow">Delete row</button>
         <button id="delete-column-button" type="button" class="btn btn-default for-editing editing-action"
                 data-action-name="DeleteColumn">Delete column</button>
         <button id="erase-content-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="EraseCellContent">Erase cell's content</button>
+                data-action-name="EraseCellContent">Erase cell</button>
         <button id="erase-wire-button" type="button" class="btn btn-default for-editing editing-action"
                 data-action-name="EraseWire">Erase wire</button>
         <button id="clear-all-button" type="button" class="btn btn-warning for-editing">Clear All</button>
         <input id="scale-input" type="range" min="50" max="160" step="5" value="70" style="margin:15px 0px; width:150px">
       </div>
     </div>
-
   </div>
 </div>
 
-
-<div id="fourth-block" style="width:1139px; margin: 0px auto">
-  <div class="part tool-bar"  style="opacity: 0.6; margin: 0px 0px 30px 0px" >
-    <textarea id="latex-code" class="form-control" rows="15" cols="114"></textarea>
-  </div>
-  <div class="part right-part tool-bar" style="margin: 0px 10px">
-    <div class="btn-group-vertical">
-      <label class="checkbox-inline">
-        <input id="enable-editing-check" type="checkbox" checked="checked"> Enable editing </input>
-      </label>
-      <br>
-      <a id="import-button" class="btn btn-default">Import from LaTeX code</a>
-      <a id="export-button" class="btn btn-default">Generate LaTeX code</a>
+<div class="row">
+  <div class="col-md-8">
+    <div id="latex-block" style="margin: 0px auto">
+      <div class="part block" style="opacity: 0.6; " >
+        <textarea id="latex-code" class="form-control" rows="15" cols="114"></textarea>
+      </div>
     </div>
   </div>
-</div>
+  <div class="col-md-3">
+    <div class="part right-part block" style="margin: 0px 10px">
+      <div class="btn-group-vertical">
+        <label class="checkbox-inline">
+          <input id="enable-editing-check" type="checkbox" checked="checked"> Enable editing </input>
+        </label>
+        <br>
+        <a id="import-button" class="btn btn-default">Import from LaTeX code</a>
+        <a id="export-button" class="btn btn-default">Generate LaTeX code</a>
+      </div>
+    </div>
 
+  </div>
+</div>
 
 <div id="processing-screen"></div>
 <div id="processing-caption"><h1>Processing...</h1></div>
