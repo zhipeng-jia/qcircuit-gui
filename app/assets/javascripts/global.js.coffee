@@ -84,5 +84,5 @@ $ ->
     action = new QcircuitGui.Editing[$(this).data('actionName')]
     QcircuitGui.editingInterface.changeAction(action)
 
-  $('#clear-all-button').click(-> QcircuitGui.editingInterface.doAction(QcircuitGui.Editing.clearAll))
+  $('#clear-all-button').click(-> QcircuitGui.editingInterface.clearAll())
 

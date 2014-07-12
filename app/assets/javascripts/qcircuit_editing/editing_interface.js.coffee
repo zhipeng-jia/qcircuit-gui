@@ -23,12 +23,13 @@ class QcircuitGui.Editing.EditingInterface
     @canvas.unbind('click')
 
   clearHoverState: ->
-    if 0 <= @currentCell.i && @currentCell.i < @circuit.state.length
-      if 0 <= @currentCell.j && @currentCell.j < @circuit.state[0].length
-        if @circuit.state[@currentCell.i][@currentCell.j] == 'hover'
-          @circuit.state[@currentCell.i][@currentCell.j] = 'normal'
-        if @circuit.state[@currentCell.i][@currentCell.j] == 'hover_warning'
-          @circuit.state[@currentCell.i][@currentCell.j] = 'normal'
+    x = @currentCell.i
+    y = @currentCell.j
+    if 0 <= x && x < @circuit.state.length
+      if 0 <= y && y < @circuit.state[0].length
+        t = @circuit.state[x][y]
+        if t == 'hover' || t == 'hover_warning'
+          @circuit.state[x][y] = 'normal'
     @currentCell = {i: -1, j: -1}
 
   refresh: ->
@@ -40,10 +41,12 @@ class QcircuitGui.Editing.EditingInterface
     @action = action
     @refresh()
 
-  doAction: (action) ->
+  clearAll: ->
+    rows = @circuit.content.length
+    columns = @circuit.content[0].length
+    newCircuit = new QcircuitGui.Drawing.Circuit('', rows, columns)
+    @addCircuit(newCircuit)
     @action.clearState(@circuit) if @action
-    newCircuit = action(@circuit)
-    @addCircuit(newCircuit) if newCircuit
 
   changeEnable: (enable) ->
     @action.clearState(@circuit) if @action
@@ -100,6 +103,7 @@ class QcircuitGui.Editing.EditingInterface
     @circuit.grid.detectCell(QcircuitGui.Helper.pageY - @canvas.offset().top,
       QcircuitGui.Helper.pageX - @canvas.offset().left)
 
+  # when force=false, update drawing only if current cell changed
   updateDrawing: (force) =>
     return unless @circuit.grid
     return if ! force && ! @enable

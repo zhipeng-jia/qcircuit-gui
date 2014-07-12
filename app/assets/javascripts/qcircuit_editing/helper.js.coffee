@@ -10,7 +10,7 @@ QcircuitGui.Editing.eraseContent = (circuit, i, j) ->
     for k in [0...circuit.content.length]
       for item in circuit.content[k][j]
         r = k if item == x
-    x.eraseGhost(circuit.content, r, j)
+    x.eraseGhost(circuit.content, r, j) if x.eraseGhost
     tmp = new Array()
     for item in circuit.content[r][j]
       tmp.push(item) unless item == x
@@ -25,9 +25,7 @@ QcircuitGui.Editing.hasMultiRowComponent = (circuit, i, ignoreFirstRow = false) 
   false
 
 QcircuitGui.Editing.clearAll = (circuit) ->
-  rows = circuit.content.length
-  columns = circuit.content[0].length
-  return new QcircuitGui.Drawing.Circuit('', rows, columns)
+
 
 QcircuitGui.Editing.checkParenthesisMatching = (str) ->
   i = 0

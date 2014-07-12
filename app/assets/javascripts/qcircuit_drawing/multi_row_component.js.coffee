@@ -8,17 +8,15 @@ class QcircuitGui.Drawing.MultiRowComponent extends QcircuitGui.Drawing.BaseComp
     promises.push(@img.load())
 
   extendGhost: (circuitArray, i, j) ->
-    unless @parent
-      for k in [1...@span]
-        circuitArray[i + k][j].push(new QcircuitGui.Drawing.Ghost(this))
+    for k in [1...@span]
+      circuitArray[i + k][j].push(new QcircuitGui.Drawing.Ghost(this))
 
   eraseGhost: (circuitArray, i, j) ->
-    unless @parent
-      for k in [1...@span]
-        tmp = new Array()
-        for item in circuitArray[i + k][j]
-          tmp.push(item) unless item instanceof QcircuitGui.Drawing.Ghost
-        circuitArray[i + k][j] = tmp
+    for k in [1...@span]
+      tmp = new Array()
+      for item in circuitArray[i + k][j]
+        tmp.push(item) unless item instanceof QcircuitGui.Drawing.Ghost
+      circuitArray[i + k][j] = tmp
 
 class QcircuitGui.Drawing.Ghost extends QcircuitGui.Drawing.BaseComponent
   constructor: (parent) ->

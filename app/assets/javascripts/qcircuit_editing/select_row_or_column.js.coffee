@@ -36,3 +36,4 @@ class QcircuitGui.Editing.SelectRowOrColumn
   clearState: (circuit) ->
     if @clickedCell
       circuit.state[@clickedCell.i][@clickedCell.j] = 'normal'
+      @clickedCell = null
