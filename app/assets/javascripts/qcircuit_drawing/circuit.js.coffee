@@ -204,10 +204,10 @@ class QcircuitGui.Drawing.Circuit
           continue unless item instanceof QcircuitGui.Drawing.Control
           if item.extend < 0
             for k in [0...item.extend]
-              flag2[i + k][j] = true if 0 <= i + k && i + k < rows
+              flag2[i + k][j] = true if 1 <= i + k && i + k < rows
           else
             for k in [1..item.extend]
-              flag2[i + k][j] = true if 0 <= i + k && i + k < rows
+              flag2[i + k][j] = true if 1 <= i + k && i + k < rows
 
     for i in [0...rows]
       needWire = new Array()
@@ -219,10 +219,10 @@ class QcircuitGui.Drawing.Circuit
           continue if item.vertical
           if item.extend < 0
             for k in [0...item.extend]
-              needWire[j + k] = true if 0 <= j + k && j + k < columns
+              needWire[j + k] = true if 1 <= j + k && j + k < columns
           else
             for k in [1..item.extend]
-              needWire[j + k] = true if 0 <= j + k && j + k < columns
+              needWire[j + k] = true if 1 <= j + k && j + k < columns
       for j in [0...columns]
         needWire[j] = false if flag1[i][j]
       j = 0
@@ -245,10 +245,10 @@ class QcircuitGui.Drawing.Circuit
           continue if item.vertical
           if item.extend < 0
             for k in [0...item.extend]
-              needWire[j + k] = true if 0 <= j + k && j + k < columns
+              needWire[j + k] = true if 1 <= j + k && j + k < columns
           else
             for k in [1..item.extend]
-              needWire[j + k] = true if 0 <= j + k && j + k < columns
+              needWire[j + k] = true if 1 <= j + k && j + k < columns
       j = 0
       while j < columns
         if needWire[j]
@@ -269,10 +269,10 @@ class QcircuitGui.Drawing.Circuit
           continue unless item.vertical
           if item.extend < 0
             for k in [0...item.extend]
-              needWire[j + k] = true if 0 <= j + k && j + k < rows
+              needWire[j + k] = true if 1 <= j + k && j + k < rows
           else
             for k in [1..item.extend]
-              needWire[j + k] = true if 0 <= j + k && j + k < rows
+              needWire[j + k] = true if 1 <= j + k && j + k < rows
       for j in [0...rows]
         needWire[j] = false if flag2[j][i]
       j = 0
@@ -295,10 +295,10 @@ class QcircuitGui.Drawing.Circuit
           continue unless item.vertical
           if item.extend < 0
             for k in [0...item.extend]
-              needWire[j + k] = true if 0 <= j + k && j + k < rows
+              needWire[j + k] = true if 1 <= j + k && j + k < rows
           else
             for k in [1..item.extend]
-              needWire[j + k] = true if 0 <= j + k && j + k < rows
+              needWire[j + k] = true if 1 <= j + k && j + k < rows
       j = 0
       while j < rows
         if needWire[j]

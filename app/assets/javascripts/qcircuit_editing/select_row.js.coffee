@@ -17,7 +17,6 @@ class QcircuitGui.Editing.SelectRow
     else
       return if @checkFirstClick(circuit, i, j) then 'hover' else 'hover_warning'
 
-
   mouseClick: (circuit, i, j) ->
     if @clickedCell
       return null unless @checkSecondClick(circuit, i, j)
@@ -35,7 +34,8 @@ class QcircuitGui.Editing.SelectRow
   clearState: (circuit) ->
     if @clickedCell
       circuit.state[@clickedCell.i][@clickedCell.j] = 'normal'
-#???? @clickedCell = null
+      @clickedCell = null
+
 
 class QcircuitGui.Editing.AddCtrl extends QcircuitGui.Editing.SelectRow
   operate: (circuit, i, j, extend) ->

@@ -10,7 +10,7 @@ class LatexController < ApplicationController
       FileUtils.mkpath work_dir
       File.open(work_dir.join(code + '.tex'), 'w') do |f|
         f.puts '\nonstopmode'
-        f.puts '\documentclass[border=1pt,convert={density=1000}]{standalone}'
+        f.puts '\documentclass[border=1pt]{standalone}'
         f.puts '\usepackage{amsmath,amsfonts,amsthm,amssymb}'
         f.puts '\newcommand{\bra}[1]{{\left\langle{#1}\right\vert}}'
         f.puts '\newcommand{\ket}[1]{{\left\vert{#1}\right\rangle}}'
@@ -24,6 +24,7 @@ class LatexController < ApplicationController
         FileUtils.rm_r work_dir
         return send_file Rails.root.join('public', 'latex', 'invalid.png'), type: 'image/png', disposition: 'inline'
       end
+      Dir.chdir(work_dir) { system "convert -density 1000 #{code}.pdf #{code}.png" }
       FileUtils.cp work_dir.join(code + '.png'), file_path
       FileUtils.rm_r work_dir
     end
