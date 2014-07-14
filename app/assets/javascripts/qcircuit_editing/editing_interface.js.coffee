@@ -12,12 +12,16 @@ class QcircuitGui.Editing.EditingInterface
 
     @circuitList = new Array()
     @circuitList.push(@circuit)
+    @actionList = new Array()
+    @actionList.push('Create')
     @pos = 0
     @changedCallback(this)
 
     @circuit.loadResource =>
       @circuit.buildGrid(@scale)
       @circuit.draw(@canvas, @enable)
+
+    @updateHistoryList()
 
   cleanUp: ->
     @canvas.unbind('click')
@@ -32,9 +36,16 @@ class QcircuitGui.Editing.EditingInterface
           @circuit.state[x][y] = 'normal'
     @currentCell = {i: -1, j: -1}
 
+  updateHistoryListStatus: ->
+    for i in [0...@pos + 1]
+      $("#history-list-#{i}").addClass('action-done')
+    for i in [@pos + 1...@actionList.length]
+      $("#history-list-#{i}").removeClass('action-done')
+
   refresh: ->
     @clearHoverState()
     @updateDrawing(true)
+    @updateHistoryListStatus()
 
   changeAction: (action) ->
     @action.clearState(@circuit) if @action
@@ -61,12 +72,16 @@ class QcircuitGui.Editing.EditingInterface
 
   addCircuit: (circuit) ->
     @action.clearState(@circuit) if @action
+    action = @action.constructor.name
     @clearHoverState()
     @circuitList = @circuitList[0..@pos]
+    @actionList = @actionList[0..@pos]
     @circuitList.push(circuit)
+    @actionList.push(action)
     @pos += 1
     if @circuitList.length > 100
       @circuitList.shift()
+      @actionList.shift()
       @pos -= 1
     @circuit = circuit
     @circuit.buildGrid(@scale)
@@ -119,12 +134,46 @@ class QcircuitGui.Editing.EditingInterface
       @currentCell = t
       @circuit.draw(@canvas, @enable)
 
+  setPos: (i) =>
+    while @pos > i
+      @undo()
+    while @pos < i
+      @redo()
+
+  updateHistoryList: =>
+    $('#history-list').html('')
+    for i in [0...@circuitList.length]
+      $('#history-list').append("<li id='history-list-#{i}' class='history-item action-done'>#{@actionList[i]}</li>")
+
+    @historyClicked = false
+    for i in [0...@circuitList.length]
+      clickFunc = (i) =>
+        =>
+          @setPos(i)
+          @historyClicked = true
+          @historyClickedValue = i
+      $("#history-list-#{i}").bind 'click', clickFunc(i)
+      mouseOverFunc = (i) =>
+        =>
+          @setPos(i)
+      $("#history-list-#{i}").bind 'mouseover', mouseOverFunc(i)
+
+    $('#history-list *').bind 'mouseout', =>
+      if @historyClicked
+        @setPos(@historyClickedValue) 
+      else
+        @setPos(@circuitList.length - 1) 
+
+
   mouseClick: =>
+    @updateHistoryList()
     return unless @enable && @circuit.grid && @action
     t = @detectCell()
     return if t.i == -1 || t.j == -1
     res = @action.mouseClick(@circuit, t.i, t.j)
     if res
-      res.loadResource(=> @addCircuit(res))
+      res.loadResource =>
+        @addCircuit(res)
+        @updateHistoryList()
     else
       @updateDrawing()

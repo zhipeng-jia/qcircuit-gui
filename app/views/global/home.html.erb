@@ -105,9 +105,9 @@
   <div class="col-md-2">
     <div style="margin:0px 40px">
       <div class="btn-group-vertical block first-row">
-        <button id="undo-button" class="btn btn-default for-editing">Undo</a>
+<!--         <button id="undo-button" class="btn btn-default for-editing">Undo</a>
         <button id="redo-button" class="btn btn-default for-editing">Redo</a>
-        <button id="add-row-button" type="button" class="btn btn-default for-editing editing-action"
+ -->        <button id="add-row-button" type="button" class="btn btn-default for-editing editing-action"
                 data-action-name="AddRow">Add a row</button>
         <button id="add-column-button" type="button" class="btn btn-default for-editing editing-action"
                 data-action-name="AddColumn">Add a column</button>
@@ -121,6 +121,9 @@
                 data-action-name="EraseWire">Erase wire</button>
         <button id="clear-all-button" type="button" class="btn btn-warning for-editing">Clear All</button>
         <input id="scale-input" type="range" min="50" max="160" step="5" value="70" style="margin:15px 0px; width:150px">
+        <h2>History</h2>
+        <ul id="history-list" class="nav bs-docs-sidenav">
+        </ul>
       </div>
     </div>
   </div>

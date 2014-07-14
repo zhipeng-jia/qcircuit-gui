@@ -68,6 +68,20 @@
       color: red;
     }
   }
+  .history-item {
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    color: #9a9;
+    transition: background-color 200ms;
+  }
+  .history-item:hover {
+    background-color: #cfc;
+  }
+  .action-done {
+    color: #787;
+  }
 }
 
 /*
