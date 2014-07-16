@@ -1,5 +1,7 @@
 class QcircuitGui.Editing.EditingInterface
   constructor: (circuit, canvas, scale, enable, changedCallback) ->
+    @maximumCircuitListLength = 1000
+
     @circuit = circuit
     @canvas = canvas
     @scale = scale
@@ -79,7 +81,7 @@ class QcircuitGui.Editing.EditingInterface
     @circuitList.push(circuit)
     @actionList.push(action)
     @pos += 1
-    if @circuitList.length > 100
+    if @circuitList.length > @maximumCircuitListLength
       @circuitList.shift()
       @actionList.shift()
       @pos -= 1
@@ -143,7 +145,7 @@ class QcircuitGui.Editing.EditingInterface
   updateHistoryList: =>
     $('#history-list').html('')
     for i in [0...@circuitList.length]
-      $('#history-list').append("<li id='history-list-#{i}' class='history-item action-done'>#{@actionList[i]}</li>")
+      $('#history-list').append("<li id='history-list-#{i}' class='history-item action-done'>(#{i})#{@actionList[i]}</li>")
 
     @historyClicked = false
     for i in [0...@circuitList.length]
@@ -164,12 +166,12 @@ class QcircuitGui.Editing.EditingInterface
       else
         @setPos(@circuitList.length - 1) 
 
-
   mouseClick: =>
     @updateHistoryList()
     return unless @enable && @circuit.grid && @action
     t = @detectCell()
     return if t.i == -1 || t.j == -1
+    $("#history-list").animate({ scrollTop: 10000}, 0);
     res = @action.mouseClick(@circuit, t.i, t.j)
     if res
       res.loadResource =>
