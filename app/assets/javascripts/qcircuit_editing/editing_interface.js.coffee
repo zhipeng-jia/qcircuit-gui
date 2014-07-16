@@ -72,14 +72,15 @@ class QcircuitGui.Editing.EditingInterface
     @circuit.buildGrid(scale)
     @refresh()
 
-  addCircuit: (circuit) ->
+  addCircuit: (circuit, description) ->
     @action.clearState(@circuit) if @action
-    action = @action.constructor.name
+#    action = @action.constructor.name
+#    actionDescription = @action.getActionDesription()
     @clearHoverState()
     @circuitList = @circuitList[0..@pos]
     @actionList = @actionList[0..@pos]
     @circuitList.push(circuit)
-    @actionList.push(action)
+    @actionList.push(description)
     @pos += 1
     if @circuitList.length > @maximumCircuitListLength
       @circuitList.shift()
@@ -174,8 +175,8 @@ class QcircuitGui.Editing.EditingInterface
     $("#history-list").animate({ scrollTop: 10000}, 0);
     res = @action.mouseClick(@circuit, t.i, t.j)
     if res
-      res.loadResource =>
-        @addCircuit(res)
+      res.circuit.loadResource =>
+        @addCircuit(res['circuit'], res['description'])
         @updateHistoryList()
     else
       @updateDrawing()

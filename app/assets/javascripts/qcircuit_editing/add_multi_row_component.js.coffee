@@ -25,15 +25,18 @@ class QcircuitGui.Editing.AddMultiRowComponent extends QcircuitGui.Editing.Selec
 
 class QcircuitGui.Editing.AddMeasure extends QcircuitGui.Editing.AddMultiRowComponent
   constructor: ->
+    @componentName = 'measure'
     @targetClass = QcircuitGui.Drawing.Measure
     super()
 
 class QcircuitGui.Editing.AddMeasureD extends QcircuitGui.Editing.AddMultiRowComponent
   constructor: ->
+    @componentName = 'measureD'
     @targetClass = QcircuitGui.Drawing.MeasureD
     super()
 
 class QcircuitGui.Editing.AddGate extends QcircuitGui.Editing.AddMultiRowComponent
   constructor: ->
+    @componentName = 'gate'
     @targetClass = QcircuitGui.Drawing.Gate
     super()

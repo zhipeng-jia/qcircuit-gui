@@ -10,6 +10,6 @@ class QcircuitGui.Editing.DeleteRow
     newCircuit = circuit.clone()
     newCircuit.content.splice(i, 1)
     newCircuit.state.splice(i, 1)
-    newCircuit
+    {'circuit': newCircuit, 'description': "Delete a row at #{i}"}
 
   clearState: (circuit) ->

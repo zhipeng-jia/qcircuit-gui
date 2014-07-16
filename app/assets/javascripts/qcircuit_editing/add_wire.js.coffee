@@ -10,8 +10,10 @@ class QcircuitGui.Editing.AddWire extends QcircuitGui.Editing.SelectRowOrColumn
 
 class QcircuitGui.Editing.AddClassicalWire extends QcircuitGui.Editing.AddWire
   constructor: ->
+    @actionName = 'Add classical wire'
     @targetClass = QcircuitGui.Drawing.ClassicalWire
 
 class QcircuitGui.Editing.AddQuantumWire extends QcircuitGui.Editing.AddWire
   constructor: ->
+    @actionName = 'Add quantum wire'
     @targetClass = QcircuitGui.Drawing.QuantumWire

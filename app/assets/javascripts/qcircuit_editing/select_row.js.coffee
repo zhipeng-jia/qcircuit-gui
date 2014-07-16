@@ -24,7 +24,7 @@ class QcircuitGui.Editing.SelectRow
       @operate(newCircuit, @clickedCell.i, @clickedCell.j, i - @clickedCell.i)
       circuit.state[@clickedCell.i][@clickedCell.j] = 'normal'
       @clickedCell = null
-      return newCircuit
+      return {'circuit': newCircuit, 'description': "Add a #{@componentName}"}
     else
       if @checkFirstClick(circuit, i, j)
         @clickedCell = {i: i, j: j}
@@ -38,12 +38,16 @@ class QcircuitGui.Editing.SelectRow
 
 
 class QcircuitGui.Editing.AddCtrl extends QcircuitGui.Editing.SelectRow
+  constructor: ->
+    @componentName = 'ctrl'
   operate: (circuit, i, j, extend) ->
     QcircuitGui.Editing.eraseContent(circuit, i, j)
     circuit.content[i][j].push(new QcircuitGui.Drawing.Control(extend))
 
 
 class QcircuitGui.Editing.AddCtrlO extends QcircuitGui.Editing.SelectRow
+  constructor: ->
+    @componentName = 'ctrlo'
   operate: (circuit, i, j, extend) ->
     QcircuitGui.Editing.eraseContent(circuit, i, j)
     circuit.content[i][j].push(new QcircuitGui.Drawing.Control(extend, true))

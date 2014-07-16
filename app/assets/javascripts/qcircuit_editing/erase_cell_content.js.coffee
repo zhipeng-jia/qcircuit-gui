@@ -5,6 +5,6 @@ class QcircuitGui.Editing.EraseCellContent
   mouseClick: (circuit, i, j) ->
     newCircuit = circuit.clone()
     QcircuitGui.Editing.eraseContent(newCircuit, i, j)
-    newCircuit
+    {'circuit': newCircuit, 'description': "Delete the cell (#{i},#{j})"}
 
   clearState: (circuit) ->

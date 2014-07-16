@@ -1,4 +1,8 @@
 class QcircuitGui.Editing.AddColumn
+  constructor: ->
+    @getActionDescription = ->
+        'Add column'
+
   getHoverState: (circuit, i, j) ->
     'hover'
 
@@ -8,6 +12,6 @@ class QcircuitGui.Editing.AddColumn
     for k in [0...rows]
       newCircuit.content[k].splice(j + 1, 0, [])
       newCircuit.state[k].splice(j + 1, 0, 'normal')
-    newCircuit
+    {'circuit': newCircuit, 'description': "Add a column at #{j}"}
 
   clearState: (circuit) ->
