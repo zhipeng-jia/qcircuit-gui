@@ -2,6 +2,11 @@
     padding: 9px 0;
 }
 
+.dropdown-menu {
+//    margin-left: 100px;
+//    margin-top: -150px;
+}
+
 .dropdown-menu .sub-menu {
     left: 100%;
     position: absolute;
@@ -30,6 +35,7 @@
     left: -7px;
     top: 10px;
 }
+
 .navbar .sub-menu:after {
     border-top: 6px solid transparent;
     border-left: none;
