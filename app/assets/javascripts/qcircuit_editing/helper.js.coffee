@@ -24,9 +24,6 @@ QcircuitGui.Editing.hasMultiRowComponent = (circuit, i, ignoreFirstRow = false) 
         return true if item instanceof QcircuitGui.Drawing.MultiRowComponent && item.span > 1
   false
 
-QcircuitGui.Editing.clearAll = (circuit) ->
-
-
 QcircuitGui.Editing.checkParenthesisMatching = (str) ->
   i = 0
   stack = ''
