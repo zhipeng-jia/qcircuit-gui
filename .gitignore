@@ -21,3 +21,4 @@ config/initializers/secret_token.rb
 /.idea
 /config/database.yml
 /config/secrets.yml
+/Gemfile.lock
