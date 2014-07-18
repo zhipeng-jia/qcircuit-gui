@@ -27,7 +27,7 @@ class QcircuitGui.Editing.SelectRowOrColumn
         @operateColumn(newCircuit, Math.min(i, @clickedCell.i), Math.max(i, @clickedCell.i), j)
       circuit.state[@clickedCell.i][@clickedCell.j] = 'normal'
       @clickedCell = null
-      return {'circuit': newCircuit, 'description': @actionName}
+      return {circuit: newCircuit, description: @actionName}
     else
       @clickedCell = {i: i, j: j}
       circuit.state[i][j] = 'selected'

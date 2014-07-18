@@ -15,6 +15,7 @@
 //= require jcanvas.js
 //= require global.js.coffee
 
+//= require qcircuit_drawing/helper.js.coffee
 //= require qcircuit_drawing/basic_drawing.js.coffee
 //= require qcircuit_drawing/base_component.js.coffee
 //= require qcircuit_drawing/latex_code_image.js.coffee

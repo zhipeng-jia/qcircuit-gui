@@ -1,9 +1,12 @@
 // Place all the styles related to the global controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 .global .home {
-  header {
-    background-color: #ada
+  #main-container {
+    width: 1170px;
+    margin: 0 auto;
+    padding-bottom: 20px;
   }
 
   h1 {
@@ -18,15 +21,9 @@
     text-shadow: 3px 3px 3px hsla(0, 0%, 0%, 0.3);
   }
 
-  .first-row {
-    height: 560px;
-  }
-
-  .row {
-    width:1170px;
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
+  #action-menu {
+    margin-top: 20px;
+    width: 100%;
   }
 
   .block {
@@ -35,17 +32,94 @@
     padding: 5px;
   }
 
-
-  #element-block {
-    #latex-content-input, #scale-input {
-      display: inline;
-    }
-  }
-  #latex-block {
-    .part {
+  #editing-area {
+    margin-top: 15px;
+    .left-panel {
+      width: 120px;
       float: left;
+      .block {
+        position: relative;
+        .btn-group-vertical {
+          width: 100%;
+        }
+        #latex-content-input {
+          position: absolute;
+          bottom: 8px;
+          width: 110px;
+        }
+
+        height: 100%;
+      }
+    }
+
+    .middle-panel {
+      margin-left: 130px;
+      margin-right: 170px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px hsla(0, 0%, 0%, 0.4);
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .right-panel {
+      width: 160px;
+      float: right;
+      .block {
+        width: 100%;
+        height: 100%;
+        .btn-group-vertical {
+          width: 100%;
+        }
+        #history-panel {
+          #history-list {
+            margin-top: 8px;
+            overflow: auto;
+            .history-item {
+              margin: 0;
+              padding: 0;
+              border: 0;
+              cursor: pointer;
+              color: #9a9;
+              font-size: 12px;
+              transition: background-color 200ms;
+            }
+            .history-item:hover {
+              background-color: #cfc;
+            }
+            .action-done {
+              color: #787;
+            }
+          }
+        }
+      }
+    }
+
+    .left-panel, .middle-panel, .right-panel {
+      height: 560px;
     }
   }
+
+  #import-area {
+    margin-top: 20px;
+    .left-part {
+      opacity: 0.6;
+      width: 750px;
+      height: 400px;
+      float: left;
+      textarea {
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .right-part {
+      margin-left: 15px;
+      float: left;
+      padding: 8px 9px;
+      .btn-group-vertical {
+        margin-top: 5px;
+      }
+    }
+  }
+
   #processing-screen {
     position: absolute;
     left: 0;
@@ -53,6 +127,7 @@
     background: black;
     opacity: 0.7;
   }
+
   #processing-caption {
     position: fixed;
     margin: 0 auto;
@@ -67,22 +142,6 @@
     h1 {
       color: red;
     }
-  }
-  .history-item {
-//    height: 15px;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    cursor: pointer;
-    color: #9a9;
-    font-size: 12px;
-    transition: background-color 200ms;
-  }
-  .history-item:hover {
-    background-color: #cfc;
-  }
-  .action-done {
-    color: #787;
   }
 }
 

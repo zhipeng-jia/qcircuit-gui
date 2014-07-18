@@ -1,12 +1,11 @@
 class QcircuitGui.Editing.EditingInterface
-  constructor: (circuit, canvas, scale, enable, changedCallback) ->
-    @maximumCircuitListLength = 1000
+  maxCircuitListLength: 1000
 
+  constructor: (circuit, canvas, scale, enable) ->
     @circuit = circuit
     @canvas = canvas
     @scale = scale
     @enable = enable
-    @changedCallback = changedCallback
     @currentCell = {i: -1, j: -1}
     @action = null
 
@@ -17,13 +16,11 @@ class QcircuitGui.Editing.EditingInterface
     @actionList = new Array()
     @actionList.push('Create')
     @pos = 0
-    @changedCallback(this)
+    QcircuitGui.rebuildHistoryPanel(true, this)
 
     @circuit.loadResource =>
       @circuit.buildGrid(@scale)
       @circuit.draw(@canvas, @enable)
-
-    @updateHistoryList()
 
   cleanUp: ->
     @canvas.unbind('click')
@@ -38,31 +35,24 @@ class QcircuitGui.Editing.EditingInterface
           @circuit.state[x][y] = 'normal'
     @currentCell = {i: -1, j: -1}
 
-  updateHistoryListStatus: ->
-    for i in [0...@pos + 1]
-      $("#history-list-#{i}").addClass('action-done')
-    for i in [@pos + 1...@actionList.length]
-      $("#history-list-#{i}").removeClass('action-done')
-
   refresh: ->
     @clearHoverState()
     @updateDrawing(true)
-    @updateHistoryListStatus()
 
   changeAction: (action) ->
-    @action.clearState(@circuit) if @action
+    @action.clearState(@circuit) if @action && @action.clearState
     @action = action
     @refresh()
 
   clearAll: ->
+    @action.clearState(@circuit) if @action && @action.clearState
     rows = @circuit.content.length
     columns = @circuit.content[0].length
     newCircuit = new QcircuitGui.Drawing.Circuit('', rows, columns)
-    @addCircuit(newCircuit)
-    @action.clearState(@circuit) if @action
+    @addCircuit(newCircuit, 'Clear all')
 
   changeEnable: (enable) ->
-    @action.clearState(@circuit) if @action
+    @action.clearState(@circuit) if @action && @action.clearState
     @action = null
     @enable = enable
     @refresh()
@@ -73,56 +63,28 @@ class QcircuitGui.Editing.EditingInterface
     @refresh()
 
   addCircuit: (circuit, description) ->
-    @action.clearState(@circuit) if @action
-#    action = @action.constructor.name
-#    actionDescription = @action.getActionDesription()
+    @action.clearState(@circuit) if @action && @action.clearState
     @clearHoverState()
     @circuitList = @circuitList[0..@pos]
     @actionList = @actionList[0..@pos]
     @circuitList.push(circuit)
     @actionList.push(description)
     @pos += 1
-    if @circuitList.length > @maximumCircuitListLength
+    if @circuitList.length > @maxCircuitListLength
       @circuitList.shift()
       @actionList.shift()
       @pos -= 1
     @circuit = circuit
     @circuit.buildGrid(@scale)
     @refresh()
-    @changedCallback()
-
-  undo: ->
-    return unless @canUndo()
-    @action.clearState(@circuit)if @action
-    @clearHoverState()
-    @pos -= 1
-    @circuit = @circuitList[@pos]
-    @circuit.buildGrid(@scale)
-    @refresh()
-    @changedCallback()
-
-  redo: ->
-    return unless @canRedo()
-    @action.clearState(@circuit)if @action
-    @clearHoverState()
-    @pos += 1
-    @circuit = @circuitList[@pos]
-    @circuit.buildGrid(@scale)
-    @refresh()
-    @changedCallback()
-
-  canUndo: ->
-    @pos > 0
-
-  canRedo: ->
-    @pos + 1 < @circuitList.length
+    QcircuitGui.rebuildHistoryPanel(true)
 
   detectCell: ->
-    @circuit.grid.detectCell(QcircuitGui.Helper.pageY - @canvas.offset().top,
-      QcircuitGui.Helper.pageX - @canvas.offset().left)
+    @circuit.grid.detectCell(QcircuitGui.Editing.Helper.pageY - @canvas.offset().top,
+      QcircuitGui.Editing.Helper.pageX - @canvas.offset().left)
 
   # when force=false, update drawing only if current cell changed
-  updateDrawing: (force) =>
+  updateDrawing: (force = false) =>
     return unless @circuit.grid
     return if ! force && ! @enable
     t = @detectCell()
@@ -137,46 +99,33 @@ class QcircuitGui.Editing.EditingInterface
       @currentCell = t
       @circuit.draw(@canvas, @enable)
 
+  preview: (i) =>
+    return unless 0 <= i && i < @circuitList.length
+    @action.clearState(@circuit) if @action && @action.clearState
+    @clearHoverState()
+    @circuit = @circuitList[i]
+    @circuit.buildGrid(@scale)
+    @refresh()
+
+  endPreview: =>
+    @setPos(@pos)
+
   setPos: (i) =>
-    while @pos > i
-      @undo()
-    while @pos < i
-      @redo()
-
-  updateHistoryList: =>
-    $('#history-list').html('')
-    for i in [0...@circuitList.length]
-      $('#history-list').append("<li id='history-list-#{i}' class='history-item action-done'>(#{i})#{@actionList[i]}</li>")
-
-    @historyClicked = false
-    for i in [0...@circuitList.length]
-      clickFunc = (i) =>
-        =>
-          @setPos(i)
-          @historyClicked = true
-          @historyClickedValue = i
-      $("#history-list-#{i}").bind 'click', clickFunc(i)
-      mouseOverFunc = (i) =>
-        =>
-          @setPos(i)
-      $("#history-list-#{i}").bind 'mouseover', mouseOverFunc(i)
-
-    $('#history-list *').bind 'mouseout', =>
-      if @historyClicked
-        @setPos(@historyClickedValue) 
-      else
-        @setPos(@circuitList.length - 1) 
+    return unless 0 <= i && i < @circuitList.length
+    @action.clearState(@circuit) if @action && @action.clearState
+    @clearHoverState()
+    @pos = i
+    @circuit = @circuitList[@pos]
+    @circuit.buildGrid(@scale)
+    @refresh()
 
   mouseClick: =>
-    @updateHistoryList()
     return unless @enable && @circuit.grid && @action
     t = @detectCell()
     return if t.i == -1 || t.j == -1
-    $("#history-list").animate({ scrollTop: 10000}, 0);
     res = @action.mouseClick(@circuit, t.i, t.j)
     if res
       res.circuit.loadResource =>
-        @addCircuit(res['circuit'], res['description'])
-        @updateHistoryList()
+        @addCircuit(res.circuit, res.description)
     else
       @updateDrawing()

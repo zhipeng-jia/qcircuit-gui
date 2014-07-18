@@ -1,160 +1,172 @@
-<div class="bs-docs-header" id="content" style="">
-  <div class="container">
-    <h1>Latex Generator for Q-circuits</h1>
-    <h2>Write less, do more.</h2>
-  </div>
+<div id="main-container">
+
+<div>
+<h1>LateX Generator for Q-circuits</h1>
+<h2>Write less, do more.</h2>
 </div>
 
-<div class="row">
-  <div class='col-md-12' style='width: 1137px'>
+<div id="action-menu">
+<div class="block">
+  <ul class="nav nav-pills">
+    <li class="dropdown">
+      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Wires</a>
+      <ul class="dropdown-menu" id="wires">
+        <li><a href="#">Q-wire</a></li>
+        <li><a href="#">C-wire</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Ctrl</a>
+      <ul class="dropdown-menu" id="ctrls">
+        <li><a href="#">Ctrl</a></li>
+        <li><a href="#">CtrlO</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Control</a>
+      <ul class="dropdown-menu" id="controls">
+        <li><a href="#">Control</a></li>
+        <li><a href="#">ControlO</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Utility</a>
+      <ul class="dropdown-menu" id="utilities">
+        <li><a href="#">Meter</a></li>
+        <li><a href="#">Q-swap</a></li>
+        <li><a href="#">TargetGate</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Measure</a>
+      <ul class="dropdown-menu" id="mesures">
+        <li><a href="#">Measure</a></li>
+        <li><a href="#">MeasureTab</a></li>
+        <li><a href="#">MeasureD</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Stick</a>
+      <ul class="dropdown-menu" id="sticks">
+        <li><a href="#">L-stick</a></li>
+        <li><a href="#">R-stick</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+</div>
+
+<div id="editing-area" class="clearfix">
+
+  <div class="left-panel">
     <div class="block">
-    <ul class="nav nav-pills">
-      <li class="dropdown">
-	<a href="#" data-toggle="dropdown" class="dropdown-toggle">Wires</a>
-	<ul class="dropdown-menu" id="wires">
-	  <li><a href="#">Q-wire</a></li>
-	  <li><a href="#">C-wire</a></li>
-	</ul>
-      </li>
-      <li class="dropdown">
-	<a href="#" data-toggle="dropdown" class="dropdown-toggle">Ctrl</a>
-	<ul class="dropdown-menu" id="ctrls">
-	  <li><a href="#">Ctrl</a></li>
-	  <li><a href="#">CtrlO</a></li>
-	</ul>
-      </li>
-      <li class="dropdown">
-	<a href="#" data-toggle="dropdown" class="dropdown-toggle">Control</a>
-	<ul class="dropdown-menu" id="controls">
-	  <li><a href="#">Control</a></li>
-	  <li><a href="#">ControlO</a></li>
-	</ul>
-      </li>
-      <li class="dropdown">
-	<a href="#" data-toggle="dropdown" class="dropdown-toggle">Utility</a>
-	<ul class="dropdown-menu" id="utilities">
-	  <li><a href="#">Meter</a></li>
-	  <li><a href="#">Q-swap</a></li>
-	  <li><a href="#">TargetGate</a></li>
-	</ul>
-      </li>
-      <li class="dropdown">
-	<a href="#" data-toggle="dropdown" class="dropdown-toggle">Measure</a>
-	<ul class="dropdown-menu" id="mesures">
-	  <li><a href="#">Measure</a></li>
-	  <li><a href="#">MeasureTab</a></li>
-	  <li><a href="#">MeasureD</a></li>
-	</ul>
-      </li>
-      <li class="dropdown">
-	<a href="#" data-toggle="dropdown" class="dropdown-toggle">Stick</a>
-	<ul class="dropdown-menu" id="sticks">
-	  <li><a href="#">L-stick</a></li>
-	  <li><a href="#">R-stick</a></li>
-	</ul>
-      </li>
-    </ul>
-  </div>
-  </div>
-
-</div>
-
-<div class="row">
-  <div id="element-block" class="col-md-1">
-    <div>
-      <div id="latex-code-state" class="btn-group-vertical first-row block" style="width:117px">
+      <div class="btn-group-vertical">
         <button id="q-wire-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddQuantumWire">Q-wire</button>
+                data-action-name="AddQuantumWire">Q-wire
+        </button>
         <button id="gate-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddGate">Gate</button>
+                data-action-name="AddGate">Gate
+        </button>
         <button id="ctrl-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddCtrl">Ctrl</button>
+                data-action-name="AddCtrl">Ctrl
+        </button>
         <button id="ctrlo-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddCtrlO">CtrlO</button>
+                data-action-name="AddCtrlO">CtrlO
+        </button>
         <button id="control-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddControl">Control</button>
+                data-action-name="AddControl">Control
+        </button>
         <button id="controlo-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddControlO">ControlO</button>
+                data-action-name="AddControlO">ControlO
+        </button>
         <button id="c-wire-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddClassicalWire">C-wire</button>
+                data-action-name="AddClassicalWire">C-wire
+        </button>
         <button id="meter-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddMeter">Meter</button>
+                data-action-name="AddMeter">Meter
+        </button>
         <button id="target-gate-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddTargetGate">TargetGate</button>
+                data-action-name="AddTargetGate">TargetGate
+        </button>
         <button id="measure-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddMeasure">Measure</button>
+                data-action-name="AddMeasure">Measure
+        </button>
         <button id="measure-d-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddMeasureD">MeasureD</button>
+                data-action-name="AddMeasureD">MeasureD
+        </button>
         <button id="measure-tab-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddMeasureTab">MeasureTab</button>
+                data-action-name="AddMeasureTab">MeasureTab
+        </button>
         <button id="q-swap-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddQswap">Q-swap</button>
+                data-action-name="AddQswap">Q-swap
+        </button>
         <button id="l-stick-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddLeftStick">L-stick</button>
+                data-action-name="AddLeftStick">L-stick
+        </button>
         <button id="r-stick-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddRightStick">R-stick</button>
-        <br>
+                data-action-name="AddRightStick">R-stick
+        </button>
+      </div>
+      <div class="form-group">
         <input id="latex-content-input" type="text" class="form-control for-editing" placeholder="LaTeX code">
       </div>
     </div>
   </div>
-  <div class="col-md-8" style="margin-left: 30px; ">
-    <div class="first-row" style="width: 810px; border-radius: 5px; box-shadow: 0px 0px 10px hsla(0, 0%, 0%, 0.4); background-color: rgba(255, 255, 255, 0.3)">
-      <canvas id="drawing-area" style=""></canvas>
-    </div>
-  </div>
-  
-  <div class="col-md-2">
-    <div style="margin:0px 40px">
-      <div class="btn-group-vertical block first-row">
-<!--         <button id="undo-button" class="btn btn-default for-editing">Undo</a>
-        <button id="redo-button" class="btn btn-default for-editing">Redo</a>
- -->        <button id="add-row-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddRow">Add a row</button>
+
+  <div class="right-panel">
+    <div class="block">
+      <div class="btn-group-vertical">
+        <button id="add-row-button" type="button" class="btn btn-default for-editing editing-action"
+                data-action-name="AddRow">Add a row
+        </button>
         <button id="add-column-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="AddColumn">Add a column</button>
+                data-action-name="AddColumn">Add a column
+        </button>
         <button id="delete-row-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="DeleteRow">Delete row</button>
+                data-action-name="DeleteRow">Delete row
+        </button>
         <button id="delete-column-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="DeleteColumn">Delete column</button>
+                data-action-name="DeleteColumn">Delete column
+        </button>
         <button id="erase-content-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="EraseCellContent">Erase cell</button>
+                data-action-name="EraseCellContent">Erase cell
+        </button>
         <button id="erase-wire-button" type="button" class="btn btn-default for-editing editing-action"
-                data-action-name="EraseWire">Erase wire</button>
+                data-action-name="EraseWire">Erase wire
+        </button>
         <button id="clear-all-button" type="button" class="btn btn-warning for-editing">Clear All</button>
-        <input id="scale-input" type="range" min="50" max="160" step="5" value="70" style="margin:15px 0px; width:150px">
+      </div>
+      <input id="scale-input" type="range" min="50" max="160" step="5" value="70" style="margin:15px 0px;">
+      <div id="history-panel">
         <h2>History</h2>
-        <ul id="history-list" class="nav bs-docs-sidenav" style="overflow: auto; height:230px">
-        </ul>
+        <ul id="history-list" class="nav bs-docs-sidenav"></ul>
       </div>
     </div>
   </div>
+
+  <div class="middle-panel">
+    <canvas id="drawing-area"></canvas>
+  </div>
+
 </div>
 
-<div class="row">
-  <div class="col-md-8">
-    <div id="latex-block" style="margin: 0px auto">
-      <div class="part block" style="opacity: 0.6; " >
-        <textarea id="latex-code" class="form-control" rows="15" cols="114"></textarea>
-      </div>
-    </div>
+<div id="import-area" class="clearfix">
+  <div class="left-part block">
+    <textarea id="latex-code" class="form-control"></textarea>
   </div>
-  <div class="col-md-2" style='width: 243px; margin-left:-47px'>
-    <div class="part right-part block" style="margin: 0px 10px">
-      <div class="btn-group-vertical">
-        <label class="checkbox-inline">
-          <input id="enable-editing-check" type="checkbox" checked="checked"> Enable editing </input>
-        </label>
-        <br>
-        <a id="import-button" class="btn btn-default">Import from LaTeX code</a>
-        <a id="export-button" class="btn btn-default">Generate LaTeX code</a>
-      </div>
+  <div class="right-part block">
+    <label class="checkbox-inline">
+      <input id="enable-editing-check" type="checkbox" checked="checked"> Enable editing </input>
+    </label>
+    <br>
+    <div class="btn-group-vertical">
+      <button id="import-button" type="button" class="btn btn-default">Import from LaTeX code</button>
+      <button id="export-button" type="button" class="btn btn-default">Generate LaTeX code</button>
     </div>
-
   </div>
 </div>
 
 <div id="processing-screen"></div>
 <div id="processing-caption"><h1>Processing...</h1></div>
 
-
+</div>

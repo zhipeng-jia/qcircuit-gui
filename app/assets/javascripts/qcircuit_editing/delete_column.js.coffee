@@ -10,6 +10,4 @@ class QcircuitGui.Editing.DeleteColumn
     for k in [0...rows]
       newCircuit.content[k].splice(j, 1)
       newCircuit.state[k].splice(j, 1)
-    {'circuit': newCircuit, 'description': "Delete a column at #{j}"}
-
-  clearState: (circuit) ->
+    {circuit: newCircuit, description: "Delete a column at #{j}"}

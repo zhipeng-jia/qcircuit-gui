@@ -95,7 +95,7 @@ class QcircuitGui.Drawing.Circuit
         i = 0
         cellInfo = "In \"#{cell}\" at (row #{res.length + 1}, col #{row.length + 1}) :\n  "
         try
-          throw "Please check the parenthesis matching" if not QcircuitGui.Editing.checkParenthesisMatching(cell)
+          throw "Please check the parenthesis matching" if not QcircuitGui.Drawing.Helper.checkParenthesisMatching(cell)
           while i < cell.length
             i += 1 while @isWhiteSpace(cell.charAt(i)) && i < cell.length
             break if i >= cell.length

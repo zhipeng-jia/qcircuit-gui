@@ -1,6 +1,5 @@
 class QcircuitGui.Editing.EraseWire extends QcircuitGui.Editing.SelectRowOrColumn
-  constructor: ->
-    @actionName = 'Erase wire'
+  actionName: 'Erase wire'
 
   operateRow: (circuit, i, j1, j2) ->
     @eraseWireHorizontal(circuit, i, j1, j2, QcircuitGui.Drawing.QuantumWire)
