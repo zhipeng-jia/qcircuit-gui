@@ -49,13 +49,15 @@ $ ->
       QcircuitGui.Editing.Helper.latexCode = ''
       $(this).parent().addClass('has-error')
     QcircuitGui.editingInterface.refresh()
+
+  $('#scale-input').slider()
   
   QcircuitGui.editingInterface = new QcircuitGui.Editing.EditingInterface(
     new QcircuitGui.Drawing.Circuit('', 3, 8), $('#drawing-area'),
-    parseInt($('#scale-input').val()), $('#enable-editing-check').is(':checked'))
+    parseInt($('#scale-input').slider('getValue')), $('#enable-editing-check').is(':checked'))
 
-  $("#scale-input").change ->
-    QcircuitGui.editingInterface.changeScale(parseInt($('#scale-input').val()))
+  $('#scale-input').slider().on 'slide', ->
+    QcircuitGui.editingInterface.changeScale(parseInt($('#scale-input').slider('getValue')))
 
   $('#enable-editing-check').change ->
     QcircuitGui.editingInterface.changeEnable($('#enable-editing-check').is(':checked'))

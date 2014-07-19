@@ -12,6 +12,7 @@
 //
 //= require jquery-2.1.1.js
 //= require bootstrap.js
+//= require bootstrap-slider.js
 //= require jcanvas.js
 //= require global.js.coffee
 
