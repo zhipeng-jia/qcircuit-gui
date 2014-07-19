@@ -56,7 +56,7 @@ $ ->
     new QcircuitGui.Drawing.Circuit('', 3, 8), $('#drawing-area'),
     parseInt($('#scale-input').slider('getValue')), $('#enable-editing-check').is(':checked'))
 
-  $('#scale-input').slider().on 'slide', ->
+  $('#scale-input').slider().on 'slide slideStart slideStop', ->
     QcircuitGui.editingInterface.changeScale(parseInt($('#scale-input').slider('getValue')))
 
   $('#enable-editing-check').change ->

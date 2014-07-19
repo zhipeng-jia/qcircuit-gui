@@ -33,6 +33,8 @@ class QcircuitGui.Editing.EditingInterface
         t = @circuit.state[x][y]
         if t == 'hover' || t == 'hover_warning'
           @circuit.state[x][y] = 'normal'
+        if t == 'selected_hover_warning'
+          @circuit.state[x][y] = 'selected'
     @currentCell = {i: -1, j: -1}
 
   refresh: ->

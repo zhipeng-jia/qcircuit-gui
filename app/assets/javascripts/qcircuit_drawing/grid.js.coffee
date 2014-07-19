@@ -53,6 +53,8 @@ class QcircuitGui.Drawing.Grid extends QcircuitGui.Drawing.BasicDrawing
             @drawCell(canvas, i, j, @getStandardStrokeWidth(@scale) * 1.3, 'CornflowerBlue')
           when 'hover_warning'
             @drawCell(canvas, i, j, @getStandardStrokeWidth(@scale) * 1.3, 'Red')
+          when 'selected_hover_warning'
+            @drawCell(canvas, i, j, @getStandardStrokeWidth(@scale) * 1.3, 'Red')
           when 'selected'
             @drawCell(canvas, i, j, @getStandardStrokeWidth(@scale) * 1.3, 'Purple')
 

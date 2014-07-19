@@ -91,11 +91,14 @@
             }
           }
         }
-        #scale-slider {
-          width: 150px;
-          margin: 10px 0;
-          .tooltip {
-            display: none;
+        #scale-input-container {
+          text-align: center;
+          #scale-slider {
+            width: 130px;
+            margin: 10px 0;
+            .tooltip {
+              display: none;
+            }
           }
         }
       }
