@@ -26,7 +26,7 @@ class QcircuitGui.Drawing.Ghost extends QcircuitGui.Drawing.BaseComponent
     @parent.getWidth(scale)
 
   getHeight: (scale) ->
-    @parent.getWidth(scale)
+    @parent.getHeight(scale)
 
   latexCode: ->
     "\\ghost{#{@parent.content}}"

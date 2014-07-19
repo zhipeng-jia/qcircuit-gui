@@ -310,4 +310,3 @@ class QcircuitGui.Drawing.Circuit
           j += 1
 
     res.map((row) -> row.map((items) -> items.join(' ')).join(' & ')).join('\\\\\n')
-    
